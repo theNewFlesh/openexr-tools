@@ -68,6 +68,7 @@ test = [
     "pytest-forked",
     "pytest-xdist",
     "pytest",
+    "scikit-image>=0.20.0",
 ]
 
 [tool.pytest.ini_options]
