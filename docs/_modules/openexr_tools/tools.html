@@ -1,0 +1,411 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>openexr_tools.tools &mdash; openexr-tools  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> openexr-tools
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#production-cli">Production CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#development-cli">Development CLI</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">enum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html#module-openexr_tools.tools">tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development CLI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">cli</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">openexr-tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>openexr_tools.tools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for openexr_tools.tools</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">numpy.typing</span> <span class="kn">import</span> <span class="n">DTypeLike</span><span class="p">,</span> <span class="n">NDArray</span>  <span class="c1"># noqa F401</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>  <span class="c1"># noqa F401</span>
+
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">Imath</span> <span class="k">as</span> <span class="nn">imath</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">OpenEXR</span> <span class="k">as</span> <span class="nn">openexr</span>
+
+<span class="kn">from</span> <span class="nn">openexr_tools.enum</span> <span class="kn">import</span> <span class="n">ImageCodec</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="read_exr"><a class="viewcode-back" href="../../modules.html#openexr_tools.tools.read_exr">[docs]</a><span class="k">def</span> <span class="nf">read_exr</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
+    <span class="c1"># type: (Union[str, Path]) -&gt; Tuple[NDArray, dict]</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Reads an OpenEXR image file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fullpath (str or Path): Image file path.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        IOError: If given filepath is not an EXR file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple[numpy.NDArray, dict]: Image and metadata.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fullpath</span><span class="p">,</span> <span class="n">Path</span><span class="p">):</span>
+        <span class="n">fullpath</span> <span class="o">=</span> <span class="n">fullpath</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">openexr</span><span class="o">.</span><span class="n">isOpenExrFile</span><span class="p">(</span><span class="n">fullpath</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">fullpath</span><span class="si">}</span><span class="s1"> is not an EXR file.&#39;</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="n">img</span> <span class="o">=</span> <span class="n">openexr</span><span class="o">.</span><span class="n">InputFile</span><span class="p">(</span><span class="n">fullpath</span><span class="p">)</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">header</span><span class="p">()</span>
+    <span class="n">win</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;dataWindow&#39;</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">win</span><span class="o">.</span><span class="n">max</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">win</span><span class="o">.</span><span class="n">min</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">win</span><span class="o">.</span><span class="n">max</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">win</span><span class="o">.</span><span class="n">min</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="c1"># EXR headers store channel data in a map, so there can be no suuport for</span>
+    <span class="c1"># arbitrary channel order persistence.</span>
+    <span class="n">image_stack</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">channels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;RGBA&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+            <span class="n">channels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span>
+            <span class="n">temp</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+        <span class="n">channels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">][</span><span class="n">chan</span><span class="p">]</span>
+        <span class="n">temp_img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">channel</span><span class="p">(</span><span class="n">chan</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+
+        <span class="c1"># FLOAT is float32, HALF is float16</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span>  <span class="c1"># type: DTypeLike</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">type</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;HALF&#39;</span><span class="p">:</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float16</span>
+
+        <span class="n">temp_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">temp_img</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+        <span class="n">image_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_img</span><span class="p">)</span>
+
+    <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dstack</span><span class="p">(</span><span class="n">image_stack</span><span class="p">)</span>  <span class="c1"># type: np.ndarray</span>
+    <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">channels</span><span class="p">]</span>
+    <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;num_channels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span>
+
+    <span class="c1"># convert to compression enum</span>
+    <span class="n">comp</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;compression&#39;</span><span class="p">]</span>
+    <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;compression&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImageCodec</span><span class="o">.</span><span class="n">from_exr_code</span><span class="p">(</span><span class="n">comp</span><span class="o">.</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">metadata</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+            <span class="n">metadata</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">image</span><span class="p">,</span> <span class="n">metadata</span></div>
+
+
+<div class="viewcode-block" id="clean_exr_metadadata"><a class="viewcode-back" href="../../modules.html#openexr_tools.tools.clean_exr_metadadata">[docs]</a><span class="k">def</span> <span class="nf">clean_exr_metadadata</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">metadata</span><span class="p">):</span>
+    <span class="c1"># type: (NDArray, dict) -&gt; dict</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Uses given image and metadata dictionary to create EXR metadata for use in</span>
+<span class="sd">    writing EXRs.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image (numpy.NDArray): Image.</span>
+<span class="sd">        metadata (dict): Metadata dictionary.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: Clean metadata.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
+
+    <span class="c1"># ensure length of channels is the same length as image&#39;s channel dimension</span>
+    <span class="n">num_channels</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">num_channels</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">channels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="s1">&#39;channels&#39;</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">:</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span>
+
+    <span class="c1"># do not assume rgba channel names for unnamed channels</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">num_channels</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
+        <span class="n">channels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;aux_</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s1">04d</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># use l channel name for grayscale images</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">channels</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">channels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;aux_0000&#39;</span><span class="p">:</span>
+        <span class="n">channels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;l&#39;</span><span class="p">]</span>
+
+    <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">channels</span>
+
+    <span class="c1"># remove forbidden keys</span>
+    <span class="n">forbidden</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;compression&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;dataWindow&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;displayWindow&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;lineOrder&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;pixelAspectRatio&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;screenWindowCenter&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;screenWindowWidth&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">intersect</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">metadata</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">forbidden</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">intersect</span><span class="p">:</span>
+        <span class="k">del</span> <span class="n">metadata</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">metadata</span></div>
+
+
+<div class="viewcode-block" id="write_exr"><a class="viewcode-back" href="../../modules.html#openexr_tools.tools.write_exr">[docs]</a><span class="k">def</span> <span class="nf">write_exr</span><span class="p">(</span><span class="n">fullpath</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">codec</span><span class="o">=</span><span class="n">ImageCodec</span><span class="o">.</span><span class="n">PIZ</span><span class="p">):</span>
+    <span class="c1"># type: (Union[str, Path], NDArray, dict, ImageCodec) -&gt; None</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Writes image data and metadata as EXR to given file path.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fullpath (str or Path): Path to EXR file.</span>
+<span class="sd">        image (numpy.NDArray): Image data.</span>
+<span class="sd">        metadata (dict): Dictionary of EXR metadata.</span>
+<span class="sd">        codec (ImageCodec, optional): Image codec. Default: ImageCodec.PIZ.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If image is not float16 or float32.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">dtype</span>
+    <span class="k">if</span> <span class="n">dtype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">]:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;EXR cannot be saved with array of dtype: </span><span class="si">{</span><span class="n">dtype</span><span class="si">}</span><span class="s1">.&#39;</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="c1"># determine bit depth of EXR</span>
+    <span class="n">ctype</span> <span class="o">=</span> <span class="n">imath</span><span class="o">.</span><span class="n">Channel</span><span class="p">(</span><span class="n">imath</span><span class="o">.</span><span class="n">PixelType</span><span class="p">(</span><span class="n">imath</span><span class="o">.</span><span class="n">PixelType</span><span class="o">.</span><span class="n">FLOAT</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">float16</span><span class="p">:</span>
+        <span class="n">ctype</span> <span class="o">=</span> <span class="n">imath</span><span class="o">.</span><span class="n">Channel</span><span class="p">(</span><span class="n">imath</span><span class="o">.</span><span class="n">PixelType</span><span class="p">(</span><span class="n">imath</span><span class="o">.</span><span class="n">PixelType</span><span class="o">.</span><span class="n">HALF</span><span class="p">))</span>
+
+    <span class="c1"># ensure metadata is clean</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="n">clean_exr_metadadata</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
+
+    <span class="c1"># ensure image has a channel axis</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="c1"># create EXR data and channels objects</span>
+    <span class="n">channels</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">chan</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]):</span>
+        <span class="n">chan</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="s1">&#39;lrgba&#39;</span><span class="p">):</span>
+            <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span> <span class="o">=</span> <span class="n">image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()</span>
+        <span class="n">channels</span><span class="p">[</span><span class="n">chan</span><span class="p">]</span> <span class="o">=</span> <span class="n">ctype</span>
+
+    <span class="c1"># create EXR header</span>
+    <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">openexr</span><span class="o">.</span><span class="n">Header</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="c1"># all strings must be bytes</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">metadata</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">header</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="n">header</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">channels</span>
+    <span class="n">header</span><span class="p">[</span><span class="s1">&#39;compression&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">imath</span><span class="o">.</span><span class="n">Compression</span><span class="p">(</span><span class="n">codec</span><span class="o">.</span><span class="n">exr_code</span><span class="p">)</span>
+
+    <span class="c1"># write EXR data</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fullpath</span><span class="p">,</span> <span class="n">Path</span><span class="p">):</span>
+        <span class="n">fullpath</span> <span class="o">=</span> <span class="n">fullpath</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="n">openexr</span><span class="o">.</span><span class="n">OutputFile</span><span class="p">(</span><span class="n">fullpath</span><span class="p">,</span> <span class="n">header</span><span class="p">)</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">writePixels</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, Alex Braun &lt;alexander.g.braun@gmail.com&gt;.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
