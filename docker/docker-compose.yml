@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  openexr-tools:
+    container_name: openexr-tools
+    image: openexr-tools:dev
+    build:
+      context: .
+      dockerfile: dev.dockerfile
+    ports:
+      - "4100:9000"
+      - "4180:8080"
+    userns_mode: "host"
+    user: ubuntu
+    env_file:
+      - config/dev-env
+    volumes:
+      - ../:/home/ubuntu/openexr-tools
+      - ~/.ssh:/home/ubuntu/.ssh:ro
+      - ./config/jupyter:/home/ubuntu/.jupyter
+      - ./config/zshrc:/home/ubuntu/.zshrc
+      - ../artifacts:/tmp/dash_artifacts
+      # - /mnt/storage:/mnt/storage
+    working_dir: "/home/ubuntu"
+    command: "tail -f /dev/null"
