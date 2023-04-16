@@ -1,6 +1,7 @@
 from numpy.typing import DTypeLike, NDArray  # noqa F401
 from typing import Tuple, Union  # noqa F401
 
+from copy import deepcopy
 from pathlib import Path
 
 import Imath as imath
@@ -75,6 +76,59 @@ def read_exr(fullpath):
             metadata[key] = val.decode('utf-8')
 
     return image, metadata
+
+
+def clean_exr_metadadata(image, metadata):
+    # type: (NDArray, dict) -> dict
+    '''
+    Uses given image and metadata dictionary to create EXR metadata for use in
+    writing EXRs.
+
+    Args:
+        image (numpy.NDArray): Image.
+        metadata (dict): Metadata dictionary.
+
+    Returns:
+        dict: Clean metadata.
+    '''
+    metadata = deepcopy(metadata)
+
+    # ensure length of channels is the same length as image's channel dimension
+    num_channels = 1
+    if len(image.shape) > 2:
+        num_channels = image.shape[2]
+
+    channels = []
+    if 'channels' in metadata:
+        channels = metadata['channels']
+
+    # do not assume rgba channel names for unnamed channels
+    delta = num_channels - len(channels)
+    for i in range(delta):
+        channels.append(f'aux_{i:04d}')
+
+    # use l channel name for grayscale images
+    if len(channels) == 1 and channels[0] == 'aux_0000':
+        channels = ['l']
+
+    metadata['channels'] = channels
+
+    # remove forbidden keys
+    forbidden = [
+        'compression',
+        'dataWindow',
+        'displayWindow',
+        'lineOrder',
+        'pixelAspectRatio',
+        'screenWindowCenter',
+        'screenWindowWidth',
+    ]
+    intersect = set(metadata.keys()).intersection(forbidden)
+    for key in intersect:
+        del metadata[key]
+
+    return metadata
+
 
 def write_exr(fullpath, image, metadata, codec=ImageCodec.PIZ):
     # type: (Union[str, Path], NDArray, dict, ImageCodec) -> None
