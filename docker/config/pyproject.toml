@@ -53,6 +53,7 @@ lab = [
     "jupyterlab-henanigans>=0.2.2",
     "jupyterlab-sublime",
     "jupyterlab",
+    "rolling-pin>=0.9.3",
 ]
 dev = [
     "m2r2",
