@@ -5,3 +5,11 @@ enum
     :private-members:
     :undoc-members:
     :show-inheritance:
+
+tools
+-----
+.. automodule:: openexr_tools.tools
+    :members:
+    :private-members:
+    :undoc-members:
+    :show-inheritance:
