@@ -3,6 +3,7 @@ from typing import Tuple, Union  # noqa F401
 
 from pathlib import Path
 
+import Imath as imath
 import numpy as np
 import OpenEXR as openexr
 
@@ -74,3 +75,65 @@ def read_exr(fullpath):
             metadata[key] = val.decode('utf-8')
 
     return image, metadata
+
+def write_exr(fullpath, image, metadata, codec=ImageCodec.PIZ):
+    # type: (Union[str, Path], NDArray, dict, ImageCodec) -> None
+    '''
+    Writes image data and metadata as EXR to given file path.
+
+    Args:
+        fullpath (str or Path): Path to EXR file.
+        image (numpy.NDArray): Image data.
+        metadata (dict): Dictionary of EXR metadata.
+        codec (ImageCodec, optional): Image codec. Default: ImageCodec.PIZ.
+
+    Raises:
+        TypeError: If image is not float16 or float32.
+    '''
+    dtype = image.dtype
+    if dtype not in [np.float16, np.float32]:
+        msg = f'EXR cannot be saved with array of dtype: {dtype}.'
+        raise TypeError(msg)
+
+    # determine bit depth of EXR
+    ctype = imath.Channel(imath.PixelType(imath.PixelType.FLOAT))
+    if dtype == np.float16:
+        ctype = imath.Channel(imath.PixelType(imath.PixelType.HALF))
+
+    # ensure metadata is clean
+    metadata = clean_exr_metadadata(image, metadata)
+
+    # ensure image has a channel axis
+    if len(image.shape) < 3:
+        shape = list(image.shape) + [1]
+        image = image.reshape(shape)
+
+    # create EXR data and channels objects
+    channels = {}
+    data = {}
+    for i, chan in enumerate(metadata['channels']):
+        chan = str(chan)
+        if chan in list('lrgba'):
+            chan = chan.upper()
+        data[chan] = image[:, :, i].tobytes()
+        channels[chan] = ctype
+
+    # create EXR header
+    y, x = image.shape[:2]
+    header = openexr.Header(x, y)
+
+    # all strings must be bytes
+    for key, val in metadata.items():
+        if isinstance(val, str):
+            val = val.encode('utf-8')
+        header[key] = val
+
+    header['channels'] = channels
+    header['compression'] = imath.Compression(codec.exr_code)
+
+    # write EXR data
+    if isinstance(fullpath, Path):
+        fullpath = fullpath.absolute().as_posix()
+
+    output = openexr.OutputFile(fullpath, header)
+    output.writePixels(data)
