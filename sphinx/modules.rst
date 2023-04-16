@@ -5,5 +5,3 @@ enum
     :private-members:
     :undoc-members:
     :show-inheritance:
-
-   core
