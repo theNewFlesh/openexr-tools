@@ -46,3 +46,37 @@ class ImageCodec(Enum):
         '''
         self.string = string  # type: ignore
         self.exr_code = exr_code
+
+    def __repr__(self):
+        # type: () -> str
+        return f'''
+<ImageCodec.{self.name.upper()}>
+  string: {self.string}
+exr_code: {self.exr_code}'''[1:]
+
+    @staticmethod
+    def from_exr_code(code):
+        # type: (int) -> ImageCodec
+        '''
+        Constructs a ImageCodec instance from a given EXR code.
+
+        Args:
+            code (int): EXR compression code.
+
+        Raises:
+            EnforceError: If value given is not an integer.
+            EnforceError: If no ImageCodec type can be found for given code.
+
+        Returns:
+            ImageCodec: ImageCodec instance.
+        '''
+        msg = 'Value given is not an integer. {a} != {b}.'
+        Enforce(code, 'instance of', int, message=msg)
+
+        lut = {x.exr_code: x for x in ImageCodec.__members__.values()}
+
+        msg = 'EXR code {a} has no legal ImageCodec type. '
+        msg += f'Legal EXR codes: {sorted(lut.keys())}.'
+        Enforce(code, 'in', lut.keys(), message=msg)
+
+        return lut[code]
