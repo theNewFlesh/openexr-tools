@@ -37,3 +37,25 @@ exr_code: 5'''[1:]
         expected += 'Legal EXR codes: .*'
         with self.assertRaisesRegexp(EnforceError, expected):
             ImageCodec.from_exr_code(99)
+
+    def test_from_string(self):
+        self.assertEqual(ImageCodec.from_string('b44'), ImageCodec.B44)
+        self.assertEqual(ImageCodec.from_string('b44a'), ImageCodec.B44A)
+        self.assertEqual(ImageCodec.from_string('dwaa'), ImageCodec.DWAA)
+        self.assertEqual(ImageCodec.from_string('dwab'), ImageCodec.DWAB)
+        self.assertEqual(ImageCodec.from_string('piz'), ImageCodec.PIZ)
+        self.assertEqual(ImageCodec.from_string('pxr24'), ImageCodec.PXR24)
+        self.assertEqual(ImageCodec.from_string('rle'), ImageCodec.RLE)
+        self.assertEqual(ImageCodec.from_string('uncompressed'), ImageCodec.UNCOMPRESSED)
+        self.assertEqual(ImageCodec.from_string('zip'), ImageCodec.ZIP)
+        self.assertEqual(ImageCodec.from_string('zips'), ImageCodec.ZIPS)
+
+    def test_from_string_errors(self):
+        expected = 'Value given is not a string. 77 !=.*str'
+        with self.assertRaisesRegexp(EnforceError, expected):
+            ImageCodec.from_string(77)
+
+        expected = '"taco" has no legal ImageCodec type. '
+        expected += 'Legal codec strings: .*'
+        with self.assertRaisesRegexp(EnforceError, expected):
+            ImageCodec.from_string('taco')
