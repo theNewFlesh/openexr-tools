@@ -142,3 +142,49 @@ class ToolsTests(unittest.TestCase):
             expected = 'EXR cannot be saved with array of dtype: uint8.'
             with self.assertRaisesRegex(TypeError, expected):
                 tools.write_exr(target, image, {})
+
+    def test_write_exr_metadata(self):
+        with TemporaryDirectory() as root:
+            target = Path(root, 'test_exr.exr')
+            image = np.zeros((10, 5, 4), dtype=np.float32)
+            tools.write_exr(target, image, {})
+
+            expected = dict(
+                channels=list('rgba'),
+                foo='bar',
+                compression='tacocat'
+            )
+            tools.write_exr(target, image, expected)
+            _, result = tools.read_exr(target)
+            self.assertEqual(result['channels'], expected['channels'])
+            self.assertEqual(result['foo'], expected['foo'])
+            self.assertNotEqual(
+                str(result['compression']),
+                expected['compression']
+            )
+
+    def test_write_exr_data(self):
+        with TemporaryDirectory() as root:
+            target = Path(root, 'test_exr.exr')
+
+            expected = np.zeros((10, 5, 4), dtype=np.float16)
+            expected[:, :, 0] *= 0.1
+            expected[:, :, 1] *= 0.2
+            expected[:, :, 2] *= 0.3
+            expected[:, :, 3] *= 0.4
+
+            tools.write_exr(target, expected, {})
+            result, _ = tools.read_exr(target)
+            self.assertEqual(result[:, :, 0].mean(), expected[:, :, 0].mean())
+            self.assertEqual(result[:, :, 0].mean(), expected[:, :, 0].mean())
+            self.assertEqual(result[:, :, 0].mean(), expected[:, :, 0].mean())
+            self.assertEqual(result[:, :, 0].mean(), expected[:, :, 0].mean())
+
+    def test_write_exr_compression(self):
+        with TemporaryDirectory() as root:
+            target = Path(root, 'test_exr.exr')
+            image = np.zeros((10, 5, 4), dtype=np.float32)
+            expected = ImageCodec.DWAB
+            tools.write_exr(target, image, {}, codec=expected)
+            _, result = tools.read_exr(target)
+            self.assertEqual(result['compression'], expected)
