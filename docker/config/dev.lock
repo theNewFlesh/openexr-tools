@@ -61,7 +61,7 @@ summary = "Module for decorators, wrappers and monkey patching."
 [metadata]
 lock_version = "4.2"
 groups = ["default"]
-content_hash = "sha256:bdfe1af1dc4e8a4a7b1f55172e4f3b5b971a6de5a03db015c9cbe2ca7b1c381a"
+content_hash = "sha256:fe92b3f583583852e1a2d9a0caf3ff32ac787498954d477d0a3924dfc32fc103"
 
 [metadata.files]
 "click 8.1.3" = [

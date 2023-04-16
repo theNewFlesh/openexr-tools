@@ -1,7 +1,6 @@
-
 [project]
 name = "openexr-tools"
-version = "0.1.0"
+version = "0.2.0"
 description = "Tools for working with OpenEXR image files."
 authors = [
     {name = "Alex Braun", email = "alexander.g.braun@gmail.com"},
