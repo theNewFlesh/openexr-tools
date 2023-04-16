@@ -1,6 +1,6 @@
 [project]
 name = "openexr-tools"
-version = "0.3.0"
+version = "0.3.1"
 description = "Tools for working with OpenEXR image files."
 authors = [
     { name = "Alex Braun", email = "alexander.g.braun@gmail.com" },
@@ -42,7 +42,7 @@ repository = "https://github.com/thenewflesh/openexr-tools"
 documentation = "https://thenewflesh.github.io/openexr-tools"
 
 [project.scripts]
-openexr-tools = "openexr-tools.command:main"
+openexr-tools = "openexr_tools.command:main"
 
 [project.optional-dependencies]
 
