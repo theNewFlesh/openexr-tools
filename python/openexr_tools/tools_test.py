@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 import Imath as imath
 import numpy as np
 import OpenEXR as openexr
-import skimage.io
+from PIL import Image
 import unittest
 
 from openexr_tools.enum import ImageCodec
@@ -16,9 +16,9 @@ import openexr_tools.tools as tools
 class ToolsTests(unittest.TestCase):
     def write_png(self, root):
         target = Path(root, 'test.png')
-        skimage.io.imsave(
-            target, np.zeros((10, 10), dtype=np.uint8), check_contrast=False
-        )
+        Image \
+            .fromarray(np.zeros((10, 10), dtype=np.uint8)) \
+            .save(target)
         return target
 
     def write_exr(self, root, dtype, channels=list('RGBA')):
