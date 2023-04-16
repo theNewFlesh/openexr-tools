@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>openexr_tools.enum &mdash; openexr-tools  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> openexr-tools
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.2.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#installation">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#production-cli">Production CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html#development-cli">Development CLI</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Python API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">enum</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development CLI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">cli</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">openexr-tools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>openexr_tools.enum</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for openexr_tools.enum</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="kn">from</span> <span class="nn">lunchbox.enforce</span> <span class="kn">import</span> <span class="n">Enforce</span>
+<span class="c1"># ------------------------------------------------------------------------------</span>
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">The enum module contains enum classes for working with EXR image codes.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<div class="viewcode-block" id="ImageCodec"><a class="viewcode-back" href="../../modules.html#openexr_tools.enum.ImageCodec">[docs]</a><span class="k">class</span> <span class="nc">ImageCodec</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Legal EXR image codecs.</span>
+
+<span class="sd">    Includes:</span>
+
+<span class="sd">        * B44</span>
+<span class="sd">        * B44A</span>
+<span class="sd">        * DWAA</span>
+<span class="sd">        * DWAB</span>
+<span class="sd">        * PIZ</span>
+<span class="sd">        * PXR24</span>
+<span class="sd">        * RLE</span>
+<span class="sd">        * UNCOMPRESSED</span>
+<span class="sd">        * ZIP</span>
+<span class="sd">        * ZIPS</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">B44</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;b44&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>                    <span class="c1"># Imath.Compression.B44_COMPRESSION</span>
+    <span class="n">B44A</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;b44a&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>                  <span class="c1"># Imath.Compression.B44A_COMPRESSION</span>
+    <span class="n">DWAA</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;dwaa&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>                  <span class="c1"># Imath.Compression.DWAA_COMPRESSION</span>
+    <span class="n">DWAB</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;dwab&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>                  <span class="c1"># Imath.Compression.DWAB_COMPRESSION</span>
+    <span class="n">PIZ</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;piz&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>                    <span class="c1"># Imath.Compression.PIZ_COMPRESSION</span>
+    <span class="n">PXR24</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;pxr24&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>                <span class="c1"># Imath.Compression.PXR24_COMPRESSION</span>
+    <span class="n">RLE</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;rle&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>                    <span class="c1"># Imath.Compression.RLE_COMPRESSION</span>
+    <span class="n">UNCOMPRESSED</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;uncompressed&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Imath.Compression.NO_COMPRESSION</span>
+    <span class="n">ZIP</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;zip&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>                    <span class="c1"># Imath.Compression.ZIP_COMPRESSION</span>
+    <span class="n">ZIPS</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;zips&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>                  <span class="c1"># Imath.Compression.ZIPS_COMPRESSION</span>
+
+<div class="viewcode-block" id="ImageCodec.__init__"><a class="viewcode-back" href="../../modules.html#openexr_tools.enum.ImageCodec.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">exr_code</span><span class="p">):</span>
+        <span class="c1"># type: (str, int) -&gt; None</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            string (str): String representation of codec.</span>
+<span class="sd">            exr_code (int): EXR compression code.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">string</span> <span class="o">=</span> <span class="n">string</span>  <span class="c1"># type: ignore</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exr_code</span> <span class="o">=</span> <span class="n">exr_code</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># type: () -&gt; str</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">&lt;ImageCodec.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s1">&gt;</span>
+<span class="s1">  string: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">string</span><span class="si">}</span>
+<span class="s1">exr_code: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">exr_code</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+<div class="viewcode-block" id="ImageCodec.from_exr_code"><a class="viewcode-back" href="../../modules.html#openexr_tools.enum.ImageCodec.from_exr_code">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_exr_code</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+        <span class="c1"># type: (int) -&gt; ImageCodec</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Constructs a ImageCodec instance from a given EXR code.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            code (int): EXR compression code.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            EnforceError: If value given is not an integer.</span>
+<span class="sd">            EnforceError: If no ImageCodec type can be found for given code.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ImageCodec: ImageCodec instance.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Value given is not an integer. </span><span class="si">{a}</span><span class="s1"> != </span><span class="si">{b}</span><span class="s1">.&#39;</span>
+        <span class="n">Enforce</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="s1">&#39;instance of&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="n">lut</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="o">.</span><span class="n">exr_code</span><span class="p">:</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ImageCodec</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">()}</span>
+
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;EXR code </span><span class="si">{a}</span><span class="s1"> has no legal ImageCodec type. &#39;</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;Legal EXR codes: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">lut</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s1">.&#39;</span>
+        <span class="n">Enforce</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="n">lut</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">message</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">lut</span><span class="p">[</span><span class="n">code</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="ImageCodec.from_string"><a class="viewcode-back" href="../../modules.html#openexr_tools.enum.ImageCodec.from_string">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+        <span class="c1"># type: (str) -&gt; ImageCodec</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Constructs a ImageCodec instance from a given string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            string (int): ImageCodec string.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            EnforceError: If value given is not a string.</span>
+<span class="sd">            EnforceError: If no ImageCodec type can be found for given string.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ImageCodec: ImageCodec instance.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Value given is not a string. </span><span class="si">{a}</span><span class="s1"> != </span><span class="si">{b}</span><span class="s1">.&#39;</span>
+        <span class="n">Enforce</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="s1">&#39;instance of&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="n">lut</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="o">.</span><span class="n">string</span><span class="p">:</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ImageCodec</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">()}</span>
+
+        <span class="n">string</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{a}</span><span class="s1">&quot; has no legal ImageCodec type. &#39;</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;Legal codec strings: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">lut</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s1">.&#39;</span>
+        <span class="n">Enforce</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="n">lut</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">message</span><span class="o">=</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">lut</span><span class="p">[</span><span class="n">string</span><span class="p">]</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2023, Alex Braun &lt;alexander.g.braun@gmail.com&gt;.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

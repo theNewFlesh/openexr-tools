@@ -101,7 +101,25 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Python API</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">enum</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">enum</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#openexr_tools.enum.ImageCodec"><code class="docutils literal notranslate"><span class="pre">ImageCodec</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#openexr_tools.enum.ImageCodec.B44"><code class="docutils literal notranslate"><span class="pre">ImageCodec.B44</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openexr_tools.enum.ImageCodec.B44A"><code class="docutils literal notranslate"><span class="pre">ImageCodec.B44A</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openexr_tools.enum.ImageCodec.DWAA"><code class="docutils literal notranslate"><span class="pre">ImageCodec.DWAA</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openexr_tools.enum.ImageCodec.DWAB"><code class="docutils literal notranslate"><span class="pre">ImageCodec.DWAB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openexr_tools.enum.ImageCodec.PIZ"><code class="docutils literal notranslate"><span class="pre">ImageCodec.PIZ</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openexr_tools.enum.ImageCodec.PXR24"><code class="docutils literal notranslate"><span class="pre">ImageCodec.PXR24</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openexr_tools.enum.ImageCodec.RLE"><code class="docutils literal notranslate"><span class="pre">ImageCodec.RLE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openexr_tools.enum.ImageCodec.UNCOMPRESSED"><code class="docutils literal notranslate"><span class="pre">ImageCodec.UNCOMPRESSED</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openexr_tools.enum.ImageCodec.ZIP"><code class="docutils literal notranslate"><span class="pre">ImageCodec.ZIP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openexr_tools.enum.ImageCodec.ZIPS"><code class="docutils literal notranslate"><span class="pre">ImageCodec.ZIPS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openexr_tools.enum.ImageCodec.__init__"><code class="docutils literal notranslate"><span class="pre">ImageCodec.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openexr_tools.enum.ImageCodec.from_exr_code"><code class="docutils literal notranslate"><span class="pre">ImageCodec.from_exr_code()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#openexr_tools.enum.ImageCodec.from_string"><code class="docutils literal notranslate"><span class="pre">ImageCodec.from_string()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development CLI</span></p>
 <ul>
@@ -173,8 +191,139 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="enum">
-<h1>enum<a class="headerlink" href="#enum" title="Permalink to this heading">¶</a></h1>
+  <section id="module-openexr_tools.enum">
+<span id="enum"></span><h1>enum<a class="headerlink" href="#module-openexr_tools.enum" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">openexr_tools.enum.</span></span><span class="sig-name descname"><span class="pre">ImageCodec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openexr_tools/enum.html#ImageCodec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openexr_tools.enum.ImageCodec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Legal EXR image codecs.</p>
+<p>Includes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>B44</p></li>
+<li><p>B44A</p></li>
+<li><p>DWAA</p></li>
+<li><p>DWAB</p></li>
+<li><p>PIZ</p></li>
+<li><p>PXR24</p></li>
+<li><p>RLE</p></li>
+<li><p>UNCOMPRESSED</p></li>
+<li><p>ZIP</p></li>
+<li><p>ZIPS</p></li>
+</ul>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec.B44">
+<span class="sig-name descname"><span class="pre">B44</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('b44',</span> <span class="pre">6)</span></em><a class="headerlink" href="#openexr_tools.enum.ImageCodec.B44" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec.B44A">
+<span class="sig-name descname"><span class="pre">B44A</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('b44a',</span> <span class="pre">7)</span></em><a class="headerlink" href="#openexr_tools.enum.ImageCodec.B44A" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec.DWAA">
+<span class="sig-name descname"><span class="pre">DWAA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('dwaa',</span> <span class="pre">8)</span></em><a class="headerlink" href="#openexr_tools.enum.ImageCodec.DWAA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec.DWAB">
+<span class="sig-name descname"><span class="pre">DWAB</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('dwab',</span> <span class="pre">9)</span></em><a class="headerlink" href="#openexr_tools.enum.ImageCodec.DWAB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec.PIZ">
+<span class="sig-name descname"><span class="pre">PIZ</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('piz',</span> <span class="pre">4)</span></em><a class="headerlink" href="#openexr_tools.enum.ImageCodec.PIZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec.PXR24">
+<span class="sig-name descname"><span class="pre">PXR24</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('pxr24',</span> <span class="pre">5)</span></em><a class="headerlink" href="#openexr_tools.enum.ImageCodec.PXR24" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec.RLE">
+<span class="sig-name descname"><span class="pre">RLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('rle',</span> <span class="pre">1)</span></em><a class="headerlink" href="#openexr_tools.enum.ImageCodec.RLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec.UNCOMPRESSED">
+<span class="sig-name descname"><span class="pre">UNCOMPRESSED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('uncompressed',</span> <span class="pre">0)</span></em><a class="headerlink" href="#openexr_tools.enum.ImageCodec.UNCOMPRESSED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec.ZIP">
+<span class="sig-name descname"><span class="pre">ZIP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('zip',</span> <span class="pre">3)</span></em><a class="headerlink" href="#openexr_tools.enum.ImageCodec.ZIP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec.ZIPS">
+<span class="sig-name descname"><span class="pre">ZIPS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('zips',</span> <span class="pre">2)</span></em><a class="headerlink" href="#openexr_tools.enum.ImageCodec.ZIPS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exr_code</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openexr_tools/enum.html#ImageCodec.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openexr_tools.enum.ImageCodec.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>string</strong> (<em>str</em>) – String representation of codec.</p></li>
+<li><p><strong>exr_code</strong> (<em>int</em>) – EXR compression code.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec.from_exr_code">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_exr_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openexr_tools/enum.html#ImageCodec.from_exr_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openexr_tools.enum.ImageCodec.from_exr_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a ImageCodec instance from a given EXR code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>code</strong> (<em>int</em>) – EXR compression code.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>EnforceError</strong> – If value given is not an integer.</p></li>
+<li><p><strong>EnforceError</strong> – If no ImageCodec type can be found for given code.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ImageCodec instance.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#openexr_tools.enum.ImageCodec" title="openexr_tools.enum.ImageCodec">ImageCodec</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="openexr_tools.enum.ImageCodec.from_string">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openexr_tools/enum.html#ImageCodec.from_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openexr_tools.enum.ImageCodec.from_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructs a ImageCodec instance from a given string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>string</strong> (<em>int</em>) – ImageCodec string.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>EnforceError</strong> – If value given is not a string.</p></li>
+<li><p><strong>EnforceError</strong> – If no ImageCodec type can be found for given string.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ImageCodec instance.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#openexr_tools.enum.ImageCodec" title="openexr_tools.enum.ImageCodec">ImageCodec</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
