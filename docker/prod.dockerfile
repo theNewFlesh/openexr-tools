@@ -41,5 +41,5 @@ RUN echo "\n${CYAN}SETUP PYTHON3.10${CLEAR}"; \
 USER ubuntu
 ENV REPO='openexr-tools'
 ENV PYTHONPATH "${PYTHONPATH}:/home/ubuntu/$REPO/python"
-RUN echo "\n${CYAN}INSTALL openexr-tools{CLEAR}"; \
+RUN echo "\n${CYAN}INSTALL OPENEXR-TOOLS{CLEAR}"; \
     pip3.10 install --user --upgrade openexr-tools
