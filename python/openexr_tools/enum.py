@@ -80,3 +80,31 @@ exr_code: {self.exr_code}'''[1:]
         Enforce(code, 'in', lut.keys(), message=msg)
 
         return lut[code]
+
+    @staticmethod
+    def from_string(string):
+        # type: (str) -> ImageCodec
+        '''
+        Constructs a ImageCodec instance from a given string.
+
+        Args:
+            string (int): ImageCodec string.
+
+        Raises:
+            EnforceError: If value given is not a string.
+            EnforceError: If no ImageCodec type can be found for given string.
+
+        Returns:
+            ImageCodec: ImageCodec instance.
+        '''
+        msg = 'Value given is not a string. {a} != {b}.'
+        Enforce(string, 'instance of', str, message=msg)
+
+        lut = {x.string: x for x in ImageCodec.__members__.values()}
+
+        string = string.lower()
+        msg = '"{a}" has no legal ImageCodec type. '
+        msg += f'Legal codec strings: {sorted(lut.keys())}.'
+        Enforce(string, 'in', lut.keys(), message=msg)
+
+        return lut[string]
