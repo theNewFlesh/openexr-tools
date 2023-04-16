@@ -30,12 +30,12 @@ exr_code: 5'''[1:]
 
     def test_from_exr_code_errors(self):
         expected = 'Value given is not an integer. bar !=.*int'
-        with self.assertRaisesRegexp(EnforceError, expected):
+        with self.assertRaisesRegex(EnforceError, expected):
             ImageCodec.from_exr_code('bar')
 
         expected = 'EXR code 99 has no legal ImageCodec type. '
         expected += 'Legal EXR codes: .*'
-        with self.assertRaisesRegexp(EnforceError, expected):
+        with self.assertRaisesRegex(EnforceError, expected):
             ImageCodec.from_exr_code(99)
 
     def test_from_string(self):
@@ -52,10 +52,10 @@ exr_code: 5'''[1:]
 
     def test_from_string_errors(self):
         expected = 'Value given is not a string. 77 !=.*str'
-        with self.assertRaisesRegexp(EnforceError, expected):
+        with self.assertRaisesRegex(EnforceError, expected):
             ImageCodec.from_string(77)
 
         expected = '"taco" has no legal ImageCodec type. '
         expected += 'Legal codec strings: .*'
-        with self.assertRaisesRegexp(EnforceError, expected):
+        with self.assertRaisesRegex(EnforceError, expected):
             ImageCodec.from_string('taco')
