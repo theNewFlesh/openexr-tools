@@ -52,7 +52,7 @@ See [documentation](https://thenewflesh.github.io/openexr-tools/) for details.
 3. `git clone git@github.com:thenewflesh/openexr-tools.git`
 4. `cd openexr-tools`
 6. `chmod +x bin/openexr-tools`
-7. `bin/openexr-tools start`
+7. `bin/openexr-tools docker-start`
 
 The service should take a few minutes to start up.
 
