@@ -101,7 +101,6 @@ Its usage pattern is: `bin/openexr-tools COMMAND [-a --args]=ARGS [-h --help] [-
 | docker-build         | Build image of openexr-tools                                              |
 | docker-build-prod    | Build production image of openexr-tools                                   |
 | docker-container     | Display the Docker container id of openexr-tools                          |
-| docker-coverage      | Generate coverage report for openexr-tools                                |
 | docker-destroy       | Shutdown openexr-tools container and destroy its image                    |
 | docker-destroy-prod  | Shutdown openexr-tools production container and destroy its image         |
 | docker-image         | Display the Docker image id of openexr-tools                              |
