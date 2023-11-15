@@ -1248,6 +1248,15 @@ requires_python = ">=3.8"
 summary = "sphinxcontrib-htmlhelp is a sphinx extension which renders HTML help files"
 
 [[package]]
+name = "sphinxcontrib-jquery"
+version = "4.1"
+requires_python = ">=2.7"
+summary = "Extension to include jQuery on newer Sphinx releases"
+dependencies = [
+    "Sphinx>=1.8",
+]
+
+[[package]]
 name = "sphinxcontrib-jsmath"
 version = "1.0.1"
 requires_python = ">=3.5"
@@ -1402,7 +1411,7 @@ dependencies = [
 [metadata]
 lock_version = "4.2"
 groups = ["default", "dev", "lab", "test"]
-content_hash = "sha256:6fceb504beb18dbddf4ef76d4a057ff7c59a2f93a266ebe858cdb5c2182fa361"
+content_hash = "sha256:48d7a6929a36ff02c80743d892e3afb38d63f3fc5e5f1f301fe144d4b2a64e6f"
 
 [metadata.files]
 "aiofiles 22.1.0" = [
@@ -2140,7 +2149,36 @@ content_hash = "sha256:6fceb504beb18dbddf4ef76d4a057ff7c59a2f93a266ebe858cdb5c21
     {url = "https://files.pythonhosted.org/packages/ff/98/7b71cabcce208f8c67398e812068524e473a143342583d55955cbb92b463/numpy-1.24.2-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:d0a2db9d20117bf523dde15858398e7c0858aadca7c0f088ac0d6edd360e9ad2"},
 ]
 "openexr 1.3.9" = [
+    {url = "https://files.pythonhosted.org/packages/1b/4a/f23db2421df4e334dde3ddf9145c55c668b7d0786877636783cd96ba2ff3/OpenEXR-1.3.9-pp38-pypy38_pp73-win_amd64.whl", hash = "sha256:1824874acd8a784dece42829238621a1d00e688af2746f599c4f659be509ebd6"},
+    {url = "https://files.pythonhosted.org/packages/32/4b/97703ed7bd9a82593ff76f4daa06114dfb52877c91024b3a9024bb8fd517/OpenEXR-1.3.9-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:262f6dd3de5d7ce60d3bebf8021c48ed8470ed5cd1683d07b65d40ae2e882ce3"},
+    {url = "https://files.pythonhosted.org/packages/33/24/13ded9af05981d5e1b6e65f061f2353d1e7ccc4852646a035de82c1fc58b/OpenEXR-1.3.9-pp37-pypy37_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:17c5bb902eb987410497cfd6cd7a8b8e9a9df1dfad917c89ab54fa39e4158257"},
+    {url = "https://files.pythonhosted.org/packages/37/f9/b890c6ec7bedca80e87966f8197bd28c52cc81d7e6c152391f020139076e/OpenEXR-1.3.9-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:138f81fe1c44bc7320e5e666f77b18a7d71f954f04646fcdda037e36d0e8d289"},
+    {url = "https://files.pythonhosted.org/packages/37/fe/f434bf20222422f3101de9fc620ae492ac2f5419747ced8c1d41a95ba97c/OpenEXR-1.3.9-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:968be3e098f5b1e531dd2064e95d1bcd1166b0e30ce54b820fd3e6873fb47f5c"},
+    {url = "https://files.pythonhosted.org/packages/44/45/d9c1ac212228fca0f794a64c611a22fe058b9fa55d3ccff9ea2a6d3abbd1/OpenEXR-1.3.9-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:50b437852c48f1d5b668b14957691180f0eb85d933cbf60a10efd3598a9db2bd"},
+    {url = "https://files.pythonhosted.org/packages/46/d4/34ff0bcb870fc942277d8584a002a3d818d27a37d230ec7217a3c516f719/OpenEXR-1.3.9-pp38-pypy38_pp73-macosx_10_9_x86_64.whl", hash = "sha256:6ac50f35a631b1a51756d0f717f821ff3cbc640cffe6313ba71ecd24f3fe3a87"},
+    {url = "https://files.pythonhosted.org/packages/4d/00/67c676ed90a063825b5e5006fc2bec9217da0870aa3278ae771ba5bdc5ae/OpenEXR-1.3.9-cp39-cp39-win_amd64.whl", hash = "sha256:5f21a562d4840ea64df82d7660ed2bef72122ac9be886d01c0bf10f77d0bc084"},
+    {url = "https://files.pythonhosted.org/packages/4d/7a/4c51887950843cac2c9becafef1b460f5b87690daa2ef6ffc1e7410c4fef/OpenEXR-1.3.9-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:865c726bc485622447e6b4d89c1987380847a205627a3e71ce4df95220d33105"},
+    {url = "https://files.pythonhosted.org/packages/52/d2/f630dff856d8a58dddb389de687ecb57650ae092c70dbe34adc902b50994/OpenEXR-1.3.9-pp38-pypy38_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:53163a74918fcd1bc36303b4a9897442dbfedfd00cb38f5325a5b7b8c06fb19d"},
+    {url = "https://files.pythonhosted.org/packages/54/a2/6a0621c3d5824fab8757e9ff9b464ef6dd33e7d052ca5cd8178a9e49b472/OpenEXR-1.3.9-pp37-pypy37_pp73-macosx_10_9_x86_64.whl", hash = "sha256:68a0b5565cd5ca7a0feb60c93b27765e9a9dda7092338fbcb963f5e785f61e9a"},
+    {url = "https://files.pythonhosted.org/packages/57/70/d137182e0f0f89d1bdbf4443519155e106429aabb6b15caa0f9e2ae48c30/OpenEXR-1.3.9-cp37-cp37m-win_amd64.whl", hash = "sha256:e5542c9dd3ecbf9fe7801034c102a73e05df9b9a9a14c3976ea452500834d955"},
+    {url = "https://files.pythonhosted.org/packages/61/4e/941869e5d233963788e102b0c0515dc8bfec6b5ff946cf43ce67bfb4dd8d/OpenEXR-1.3.9-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ce2ded17a43d22e18888915650b7b4f62d3745af8943cc34d1e2f4eccfd0b8d5"},
+    {url = "https://files.pythonhosted.org/packages/6f/95/919fc7a200c3fae23530d431059fc28471d8c672b344a9f07ea394427cc8/OpenEXR-1.3.9-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:8d4fac01157b906ad0ac19861ff6b9584096ad78b9f04f04e6a982f98b0a6ad6"},
     {url = "https://files.pythonhosted.org/packages/70/ba/53f62b17b14e76cb5eff4b72140995f7dfd614a0877cc26aab9e66f00612/OpenEXR-1.3.9.tar.gz", hash = "sha256:cffcd13906291ef1a81b369c1c0e907648ecd24363668873691f44866704ab21"},
+    {url = "https://files.pythonhosted.org/packages/7c/dd/f739c226e9caee16c1fe671cfad7e5be5daba2b09b03e60db6fa3f7bb780/OpenEXR-1.3.9-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:5ac48bfa55c64e29fad1d95f3a9beff60e52372069cdb678d291b663f9ea76a1"},
+    {url = "https://files.pythonhosted.org/packages/85/40/aace63a6dd5003a3bb95b1693b020677e5398cc833fdb6bf066aad07f9dc/OpenEXR-1.3.9-cp37-cp37m-musllinux_1_1_x86_64.whl", hash = "sha256:4d220920024945559f99aa10c10ec7ecca8a458b52f358d248349b995dcee75c"},
+    {url = "https://files.pythonhosted.org/packages/91/38/68fa28ab72ffc668f1bccf0e2e1808b12e811bd3255bc5561e159a1e5d35/OpenEXR-1.3.9-cp38-cp38-win_amd64.whl", hash = "sha256:f30316e258058f4ae736dfed7baaaf3ca859a5482605d9cfe658acd64a19acbd"},
+    {url = "https://files.pythonhosted.org/packages/9b/49/009a0bc3c6550b23bc249845ae8a19a959add92066882a6e2249aff2436a/OpenEXR-1.3.9-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:45ca2b30ba9fc9596fb4a271c6d697e1687194e433bad4681f5dd630a632bc2b"},
+    {url = "https://files.pythonhosted.org/packages/b2/c1/e5430fd7edcb1f83f7333f5194dd1e5c6624889de712f53621d97997f4eb/OpenEXR-1.3.9-cp36-cp36m-win_amd64.whl", hash = "sha256:6839bed5459f83a8203e04d6f34b1151398c32f3960001947cb75fa556492b28"},
+    {url = "https://files.pythonhosted.org/packages/c9/55/15a729bc909b14a481e0fc2b6c555037d944de7501554c8051bfe2c6092b/OpenEXR-1.3.9-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:2901c110bd98589cde377bef14fffb31e9cf4ff9cc7d4be64179963c708d210c"},
+    {url = "https://files.pythonhosted.org/packages/ca/62/84b324b3543142fec3d529d346f3bece6484ef5fc8c0a98b8e4779b3fcb6/OpenEXR-1.3.9-cp310-cp310-win_amd64.whl", hash = "sha256:e7d6ec88c5029009b787e7ffe77e5bc0079d4f0deef2b4287991cd93367de0d6"},
+    {url = "https://files.pythonhosted.org/packages/cf/8d/1676b9cb1da6a2d51364df3015d1a6e4c97ab46381096a7cc325a51280ad/OpenEXR-1.3.9-pp37-pypy37_pp73-win_amd64.whl", hash = "sha256:eddef82e69e445619e8004b688bed049537723208ad84b5d252d44341e07d447"},
+    {url = "https://files.pythonhosted.org/packages/d6/55/417bc557b7ad529464029ac14fcf82d96db31ea602b8c023828b06336bea/OpenEXR-1.3.9-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:d9e689eb14eaa57fda8ee0e857c7e0954421a733d4f47863dc2b857d291143eb"},
+    {url = "https://files.pythonhosted.org/packages/de/1a/6e15dd864e04d9d11a8c9c366c61ee4a29a6fcaf5f4a68a1a1589a3a96ae/OpenEXR-1.3.9-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:24daf8d52634b93b6327ece8636d969fd1c48ddc1e39eb0d77a99a42574b4baf"},
+    {url = "https://files.pythonhosted.org/packages/e7/41/02ba7ac2d4582e9a6b0b8ed32cd801c9fc23344172b2b6a6e52590f79cc4/OpenEXR-1.3.9-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a7f9e58d4c9d0d092a4ae7ab8cd8186915f30d18b823ff60a2352615afeaafab"},
+    {url = "https://files.pythonhosted.org/packages/ea/3b/0e6763ac2ebe4234d8a3d30cf271ef7bcde1517d4d9529861fa6c88dae55/OpenEXR-1.3.9-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:62c5b79df45660773242e5b5f775b5ed53c97a4c7d9af40852f0a3d55b0fef0c"},
+    {url = "https://files.pythonhosted.org/packages/ef/6a/7e7f2ee68c5f43a76719a73fb0aeda4108ff05aa8170b657e6fd75b3d2d1/OpenEXR-1.3.9-pp39-pypy39_pp73-macosx_10_9_x86_64.whl", hash = "sha256:961dc9618be0a9cdd26716ad10f17c1bfb0ca1a640a312b49ad84eac3b0fe7d1"},
+    {url = "https://files.pythonhosted.org/packages/f1/bc/59acb8b017e58cb72a33a4baa13899fd62be6ec1018171fc25bc095d4e49/OpenEXR-1.3.9-cp36-cp36m-musllinux_1_1_x86_64.whl", hash = "sha256:baf2ebe1180b6a6c4cfef2932442e91ea9fe59c63c4fca07ddccc23f61fce9af"},
+    {url = "https://files.pythonhosted.org/packages/ff/b0/71c3f9c8dfd556e761e84908f0d536c60cccbd8df4abb379236a9956d981/OpenEXR-1.3.9-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:259f7e0ddd5cd8690377ad726c65b963d6683d72c3c51eabee43ab3ed2e73640"},
 ]
 "packaging 23.1" = [
     {url = "https://files.pythonhosted.org/packages/ab/c3/57f0601a2d4fe15de7a553c00adbc901425661bf048f2a22dfc500caf121/packaging-23.1-py3-none-any.whl", hash = "sha256:994793af429502c4ea2ebf6bf664629d07c1a9fe974af92966e4b8d2df7edc61"},
@@ -2610,6 +2648,10 @@ content_hash = "sha256:6fceb504beb18dbddf4ef76d4a057ff7c59a2f93a266ebe858cdb5c21
 "sphinxcontrib-htmlhelp 2.0.1" = [
     {url = "https://files.pythonhosted.org/packages/6e/ee/a1f5e39046cbb5f8bc8fba87d1ddf1c6643fbc9194e58d26e606de4b9074/sphinxcontrib_htmlhelp-2.0.1-py3-none-any.whl", hash = "sha256:c38cb46dccf316c79de6e5515e1770414b797162b23cd3d06e67020e1d2a6903"},
     {url = "https://files.pythonhosted.org/packages/b3/47/64cff68ea3aa450c373301e5bebfbb9fce0a3e70aca245fcadd4af06cd75/sphinxcontrib-htmlhelp-2.0.1.tar.gz", hash = "sha256:0cbdd302815330058422b98a113195c9249825d681e18f11e8b1f78a2f11efff"},
+]
+"sphinxcontrib-jquery 4.1" = [
+    {url = "https://files.pythonhosted.org/packages/76/85/749bd22d1a68db7291c89e2ebca53f4306c3f205853cf31e9de279034c3c/sphinxcontrib_jquery-4.1-py2.py3-none-any.whl", hash = "sha256:f936030d7d0147dd026a4f2b5a57343d233f1fc7b363f68b3d4f1cb0993878ae"},
+    {url = "https://files.pythonhosted.org/packages/de/f3/aa67467e051df70a6330fe7770894b3e4f09436dea6881ae0b4f3d87cad8/sphinxcontrib-jquery-4.1.tar.gz", hash = "sha256:1620739f04e36a2c779f1a131a2dfd49b2fd07351bf1968ced074365933abc7a"},
 ]
 "sphinxcontrib-jsmath 1.0.1" = [
     {url = "https://files.pythonhosted.org/packages/b2/e8/9ed3830aeed71f17c026a07a5097edcf44b692850ef215b161b8ad875729/sphinxcontrib-jsmath-1.0.1.tar.gz", hash = "sha256:a9925e4a4587247ed2191a22df5f6970656cb8ca2bd6284309578f2153e0c4b8"},
