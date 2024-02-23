@@ -33,20 +33,30 @@ WORKDIR /home/ubuntu
 RUN echo "\n${CYAN}INSTALL GENERIC DEPENDENCIES${CLEAR}"; \
     apt update && \
     apt install -y \
+        apt-transport-https \
         bat \
+        btop \
+        ca-certificates \
         curl \
         exa \
         git \
+        gnupg \
         graphviz \
-        npm \
-        pandoc \
+        jq \
         parallel \
         ripgrep \
         software-properties-common \
+        unzip \
         vim \
         wget && \
     rm -rf /var/lib/apt/lists/*
 
+# install yq
+RUN echo "\n${CYAN}INSTALL YQ${CLEAR}"; \
+    curl -fsSL \
+        https://github.com/mikefarah/yq/releases/download/v4.9.1/yq_linux_amd64 \
+        -o /usr/local/bin/yq && \
+    chmod +x /usr/local/bin/yq
 
 # install all python versions
 RUN echo "\n${CYAN}INSTALL PYTHON${CLEAR}"; \
@@ -72,6 +82,21 @@ RUN echo "\n${CYAN}INSTALL PIP${CLEAR}"; \
     pip3.10 install --upgrade pip && \
     rm -rf get-pip.py
 
+# install nodejs (needed by jupyter lab)
+RUN echo "\n${CYAN}INSTALL NODEJS${CLEAR}"; \
+    sudo mkdir -p /etc/apt/keyrings && \
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
+        | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
+    export NODE_VERSION=18 && \
+    echo "deb \
+        [signed-by=/etc/apt/keyrings/nodesource.gpg] \
+        https://deb.nodesource.com/node_$NODE_VERSION.x \
+        nodistro main" \
+        | sudo tee /etc/apt/sources.list.d/nodesource.list && \
+    sudo apt update && \
+    sudo apt install -y nodejs && \
+    rm -rf /var/lib/apt/lists/*
+
 # install and setup zsh
 RUN echo "\n${CYAN}SETUP ZSH${CLEAR}"; \
     apt update && \
@@ -91,6 +116,26 @@ RUN echo "\n${CYAN}SETUP ZSH${CLEAR}"; \
     rm -rf install-oh-my-zsh.sh && \
     echo 'UTC' > /etc/timezone
 
+# install s6-overlay
+RUN echo "\n${CYAN}INSTALL S6${CLEAR}"; \
+    export S6_ARCH="x86_64" && \
+    export S6_VERSION="v3.1.5.0" && \
+    export S6_URL="https://github.com/just-containers/s6-overlay/releases/download" && \
+    curl -fsSL "${S6_URL}/${S6_VERSION}/s6-overlay-noarch.tar.xz" \
+        -o /tmp/s6-overlay-noarch.tar.xz && \
+    curl -fsSL "${S6_URL}/${S6_VERSION}/s6-overlay-noarch.tar.xz.sha256" \
+        -o /tmp/s6-overlay-noarch.tar.xz.sha256 && \
+    curl -fsSL "${S6_URL}/${S6_VERSION}/s6-overlay-${S6_ARCH}.tar.xz" \
+        -o /tmp/s6-overlay-${S6_ARCH}.tar.xz && \
+    curl -fsSL "${S6_URL}/${S6_VERSION}/s6-overlay-${S6_ARCH}.tar.xz.sha256" \
+        -o /tmp/s6-overlay-${S6_ARCH}.tar.xz.sha256 && \
+    tar -C / -Jxpf /tmp/s6-overlay-noarch.tar.xz && \
+    tar -C / -Jxpf /tmp/s6-overlay-${S6_ARCH}.tar.xz && \
+    rm /tmp/s6-overlay-noarch.tar.xz \
+       /tmp/s6-overlay-noarch.tar.xz.sha256 \
+       /tmp/s6-overlay-${S6_ARCH}.tar.xz \
+       /tmp/s6-overlay-${S6_ARCH}.tar.xz.sha256
+
 USER ubuntu
 ENV PATH="/home/ubuntu/.local/bin:$PATH"
 COPY ./config/henanigans.zsh-theme .oh-my-zsh/custom/themes/henanigans.zsh-theme
@@ -103,19 +148,25 @@ ENV LC_ALL "C.UTF-8"
 FROM base AS dev
 USER root
 
-# install OpenEXR
+# install gcc
 ENV CC=gcc
 ENV CXX=g++
-ENV LD_LIBRARY_PATH='/usr/include/python3.10m/dist-packages'
-RUN echo "\n${CYAN}INSTALL OPENEXR${CLEAR}"; \
+RUN echo "\n${CYAN}INSTALL GCC${CLEAR}"; \
     apt update && \
     apt install -y \
         build-essential \
         g++ \
         gcc \
-        libopenexr-dev \
-        openexr \
         zlib1g-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# install OpenEXR
+ENV LD_LIBRARY_PATH='/usr/include/python3.10m/dist-packages'
+RUN echo "\n${CYAN}INSTALL OPENEXR${CLEAR}"; \
+    apt update && \
+    apt install -y \
+        libopenexr-dev \
+        openexr && \
     rm -rf /var/lib/apt/lists/*
 
 USER ubuntu
@@ -135,8 +186,12 @@ RUN echo "\n${CYAN}INSTALL DEV DEPENDENCIES${CLEAR}"; \
     pdm completion zsh > /home/ubuntu/.oh-my-zsh/custom/completions/_pdm
 
 # setup pdm
-COPY --chown=ubuntu:ubuntu config/* /home/ubuntu/config/
-COPY --chown=ubuntu:ubuntu scripts/* /home/ubuntu/scripts/
+COPY --chown=ubuntu:ubuntu config/build.yaml /home/ubuntu/config/
+COPY --chown=ubuntu:ubuntu config/dev.lock /home/ubuntu/config/
+COPY --chown=ubuntu:ubuntu config/pdm.toml /home/ubuntu/config/
+COPY --chown=ubuntu:ubuntu config/prod.lock /home/ubuntu/config/
+COPY --chown=ubuntu:ubuntu config/pyproject.toml /home/ubuntu/config/
+COPY --chown=ubuntu:ubuntu scripts/x_tools.sh /home/ubuntu/scripts/
 RUN echo "\n${CYAN}SETUP DIRECTORIES${CLEAR}"; \
     mkdir pdm
 
@@ -160,11 +215,34 @@ RUN echo "\n${CYAN}INSTALL PROD ENVIRONMENTS${CLEAR}"; \
     x_env_init prod 3.9 && \
     x_env_init prod 3.8
 
-# cleanup dirs
+# build jupyter lab
+# RUN echo "\n${CYAN}BUILD JUPYTER LAB${CLEAR}"; \
+#     . /home/ubuntu/scripts/x_tools.sh && \
+#     export CONFIG_DIR=/home/ubuntu/config && \
+#     export SCRIPT_DIR=/home/ubuntu/scripts && \
+#     x_env_activate_dev && \
+#     jupyter lab build
+
+USER root
+
+# add s6 service and init scripts
+COPY --chown=ubuntu:ubuntu --chmod=755 scripts/s_tools.sh /home/ubuntu/scripts/
+RUN echo "\n${CYAN}SETUP S6 SERVICES${CLEAR}"; \
+    . /home/ubuntu/scripts/s_tools.sh && \
+    s_setup_services
+
+USER ubuntu
 WORKDIR /home/ubuntu
+
+# cleanup dirs
 RUN echo "\n${CYAN}REMOVE DIRECTORIES${CLEAR}"; \
-    rm -rf config scripts
+    rm -rf /home/ubuntu/config /home/ubuntu/scripts
 
 ENV REPO='openexr-tools'
 ENV PYTHONPATH ":/home/ubuntu/$REPO/python:/home/ubuntu/.local/lib"
 ENV PYTHONPYCACHEPREFIX "/home/ubuntu/.python_cache"
+ENV HOME /home/ubuntu
+ENV JUPYTER_RUNTIME_DIR /tmp/jupyter_runtime
+
+EXPOSE 8888/tcp
+ENTRYPOINT ["/init"]

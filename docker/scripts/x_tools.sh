@@ -11,12 +11,14 @@ export BUILD_DIR="$HOME/build"
 export CONFIG_DIR="$REPO_DIR/docker/config"
 export PDM_DIR="$HOME/pdm"
 export SCRIPT_DIR="$REPO_DIR/docker/scripts"
+export DOCS_DIR="$REPO_DIR/docs"
 export MIN_PYTHON_VERSION="3.8"
 export MAX_PYTHON_VERSION="3.10"
 export TEST_VERBOSITY=0
 export TEST_PROCS="auto"
 export JUPYTER_PLATFORM_DIRS=0
 export JUPYTER_CONFIG_PATH=/home/ubuntu/.jupyter
+export VSCODE_SERVER="$HOME/.vscode-server/bin/*/bin/code-server"
 alias cp=cp  # "cp -i" default alias asks you if you want to clobber files
 
 # COLORS------------------------------------------------------------------------
@@ -279,7 +281,7 @@ x_build_prod () {
 
 _x_build_publish () {
     # Publish pip package of repo to PyPi
-    # args: user, password, comment
+    # args: user, password, comment, url
     x_build_package;
     cd $BUILD_DIR;
     echo "${CYAN2}PUBLISHING PIP PACKAGE TO PYPI${CLEAR}\n";
@@ -288,6 +290,8 @@ _x_build_publish () {
         --username "$1" \
         --password "$2" \
         --comment "$3" \
+        --repository "$4" \
+        --no-very-ssl \
         --verbose;
 }
 
@@ -301,7 +305,7 @@ x_build_publish () {
         echo "${RED2}ERROR: Encountered error in testing, exiting before publish.${CLEAR}" >&2;
         return $?;
     else
-        _x_build_publish $1 $2 $3;
+        _x_build_publish $1 $2 $3 $4;
     fi;
 }
 
@@ -314,14 +318,17 @@ x_build_test () {
 
 # DOCS-FUNCTIONS----------------------------------------------------------------
 x_docs () {
-    # Generate sphinx documentation
+    # Generate documentation
     x_env_activate_dev;
     cd $REPO_DIR;
     echo "${CYAN2}GENERATING DOCS${CLEAR}\n";
-    mkdir -p docs;
-    sphinx-build sphinx docs;
-    cp -f sphinx/style.css docs/_static/style.css;
-    touch docs/.nojekyll;
+    rm -rf $DOCS_DIR;
+    mkdir -p $DOCS_DIR;
+    sphinx-build sphinx $DOCS_DIR;
+    cp -f sphinx/style.css $DOCS_DIR/_static/style.css;
+    touch $DOCS_DIR/.nojekyll;
+    # mkdir -p $DOCS_DIR/resources;
+    # cp resources/* $DOCS_DIR/resources/;
 }
 
 x_docs_architecture () {
@@ -329,7 +336,7 @@ x_docs_architecture () {
     echo "${CYAN2}GENERATING ARCHITECTURE DIAGRAM${CLEAR}\n";
     x_env_activate_dev;
     rolling-pin graph \
-        $REPO_DIR/python $REPO_DIR/docs/architecture.svg \
+        $REPO_DIR/python $DOCS_DIR/architecture.svg \
         --exclude 'test|mock|__init__' \
         --orient 'lr';
 }
@@ -346,9 +353,9 @@ x_docs_metrics () {
     x_env_activate_dev;
     cd $REPO_DIR;
     rolling-pin plot \
-        $REPO_DIR/python $REPO_DIR/docs/plots.html;
+        $REPO_DIR/python $DOCS_DIR/plots.html;
     rolling-pin table \
-        $REPO_DIR/python $REPO_DIR/docs;
+        $REPO_DIR/python $DOCS_DIR;
 }
 
 # LIBRARY-FUNCTIONS-------------------------------------------------------------
@@ -514,14 +521,19 @@ x_library_update_pdm () {
     pdm self update;
 }
 
-# SESSION-FUNCTIONS-------------------------------------------------------------
-x_session_app () {
-    # Run app
-    x_env_activate_dev;
-    echo "${CYAN2}APP${CLEAR}\n";
-    python3 $REPO_SUBPACKAGE/server/app.py;
+# QUICKSTART-FUNCTIONS----------------------------------------------------------
+x_quickstart () {
+    # Display quickstart guide
+    echo "${CYAN2}QUICKSTART GUIDE${CLEAR}\n";
+    cat $REPO_DIR/README.md \
+    | grep -A 10000 '# Quickstart' \
+    | grep -B 10000 '# Development CLI' \
+    | grep -B 10000 -E '^---$' \
+    | grep -vE '^---$' \
+    | grep -v '# Quickstart';
 }
 
+# SESSION-FUNCTIONS-------------------------------------------------------------
 x_session_lab () {
     # Run jupyter lab server
     x_env_activate_dev;
@@ -552,8 +564,9 @@ x_test_coverage () {
         --verbosity $TEST_VERBOSITY \
         --cov=$REPO_DIR/python \
         --cov-config=$CONFIG_DIR/pyproject.toml \
-        --cov-report=html:$REPO_DIR/docs/htmlcov \
+        --cov-report=html:$DOCS_DIR/htmlcov \
         $REPO_SUBPACKAGE;
+    rm -f $DOCS_DIR/htmlcov/.gitignore;
 }
 
 x_test_dev () {
@@ -635,29 +648,48 @@ x_version () {
     x_docs_full;
 }
 
+_x_version_bump () {
+    # Bump repo's version
+    # args: type
+    x_env_activate_dev;
+    local title=`echo $1 | tr '[a-z]' '[A-Z]'`;
+    echo "${CYAN2}BUMPING $title VERSION${CLEAR}\n";
+    cd $PDM_DIR
+    pdm bump $1;
+    _x_library_pdm_to_repo_dev;
+}
+
 x_version_bump_major () {
     # Bump repo's major version
-    x_env_activate_dev;
-    echo "${CYAN2}BUMPING MAJOR VERSION${CLEAR}\n";
-    cd $PDM_DIR
-    pdm bump major;
-    _x_library_pdm_to_repo_dev;
+    _x_version_bump major;
 }
 
 x_version_bump_minor () {
     # Bump repo's minor version
     x_env_activate_dev;
-    echo "${CYAN2}BUMPING MINOR VERSION${CLEAR}\n";
-    cd $PDM_DIR
-    pdm bump minor;
-    _x_library_pdm_to_repo_dev;
+    _x_version_bump minor;
 }
 
 x_version_bump_patch () {
     # Bump repo's patch version
-    x_env_activate_dev;
-    echo "${CYAN2}BUMPING PATCH VERSION${CLEAR}\n";
-    cd $PDM_DIR
-    pdm bump patch;
-    _x_library_pdm_to_repo_dev;
+    _x_version_bump patch;
+}
+
+x_version_commit () {
+    # Tag with version and commit changes to master with given message
+    # args: message
+    local version=`_x_get_version`;
+    git commit --message $version;
+    git tag --annotate $version --message "$1";
+    git push --follow-tags origin HEAD:master --push-option ci.skip;
+}
+
+# VSCODE-FUNCTIONS--------------------------------------------------------------
+x_vscode_reinstall_extensions () {
+    # Reinstall all VSCode extensions
+    echo "${CYAN2}REINSTALLING VSCODE EXTENSIONS${CLEAR}\n";
+    cat $REPO_DIR/.devcontainer.json \
+        | jq '.customizations.vscode.extensions[]' \
+        | sed 's/"//g' \
+        | parallel "$VSCODE_SERVER --install-extension {}";
 }

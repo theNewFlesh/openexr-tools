@@ -58,93 +58,151 @@ The service should take a few minutes to start up.
 
 Run `bin/openexr-tools --help` for more help on the command line tool.
 
+### ZSH Setup
+
+1. `bin/openexr-tools` must be run from this repository's top level directory.
+2. Therefore, if using zsh, it is recommended that you paste the following line
+    in your ~/.zshrc file:
+    - ```alias openexr-tools=`cd [parent dir]/openexr-tools; bin/openexr-tools` ```
+    - Replace `[parent dir]` with the parent directory of this repository
+3. Running the `zsh-complete` command will enable tab completions of the cli
+   commands, in the next shell session.
+
+   For example:
+   - `openexr-tools [tab]` will show you all the cli options, which you can press
+     tab to cycle through
+   - `openexr-tools docker-[tab]` will show you only the cli options that begin with
+     "docker-"
+
 ---
 
-# Production CLI
+# Quickstart Guide
+This repository contains a suite commands for the whole development process.
+This includes everything from testing, to documentation generation and
+publishing pip packages.
 
-openexr-tools comes with a command line interface defined in command.py.
+These commands can be accessed through:
 
-Its usage pattern is: `openexr-tools COMMAND [ARGS] [FLAGS] [-h --help]`
+  - The VSCode task runner
+  - The VSCode task runner side bar
+  - A terminal running on the host OS
+  - A terminal within this repositories docker container
 
-## Commands
+Running the `zsh-complete` command will enable tab completions of the CLI.
+See the zsh setup section for more information.
 
----
+### Command Groups
 
-### bash-completion
-Prints BASH completion code to be written to a _openexr-tools completion file
+Development commands are grouped by one of 10 prefixes:
 
-Usage: `openexr-tools bash-completion`
+| Command    | Description                                                                        |
+| ---------- | ---------------------------------------------------------------------------------- |
+| build      | Commands for building packages for testing and pip publishing                      |
+| docker     | Common docker commands such as build, start and stop                               |
+| docs       | Commands for generating documentation and code metrics                             |
+| library    | Commands for managing python package dependencies                                  |
+| session    | Commands for starting interactive sessions such as jupyter lab and python          |
+| state      | Command to display the current state of the repo and container                     |
+| test       | Commands for running tests, linter and type annotations                            |
+| version    | Commands for bumping project versions                                              |
+| quickstart | Display this quickstart guide                                                      |
+| zsh        | Commands for running a zsh session in the container and generating zsh completions |
 
----
+### Common Commands
 
-### zsh-completion
-Prints ZSH completion code to be written to a _openexr-tools completion file
+Here are some frequently used commands to get you started:
 
-Usage: `openexr-tools zsh-completion`
+| Command           | Description                                               |
+| ----------------- | --------------------------------------------------------- |
+| docker-restart    | Restart container                                         |
+| docker-start      | Start container                                           |
+| docker-stop       | Stop container                                            |
+| docs-full         | Generate documentation, coverage report, diagram and code |
+| library-add       | Add a given package to a given dependency group           |
+| library-graph-dev | Graph dependencies in dev environment                     |
+| library-remove    | Remove a given package from a given dependency group      |
+| library-search    | Search for pip packages                                   |
+| library-update    | Update dev dependencies                                   |
+| session-lab       | Run jupyter lab server                                    |
+| state             | State of                                                  |
+| test-dev          | Run all tests                                             |
+| test-lint         | Run linting and type checking                             |
+| zsh               | Run ZSH session inside container                          |
+| zsh-complete      | Generate ZSH completion script                            |
 
 ---
 
 # Development CLI
-bin/openexr-tools is a command line interface (defined in cli.py) that works with
-any version of python 2.7 and above, as it has no dependencies.
+bin/openexr-tools is a command line interface (defined in cli.py) that
+works with any version of python 2.7 and above, as it has no dependencies.
+Commands generally do not expect any arguments or flags.
 
 Its usage pattern is: `bin/openexr-tools COMMAND [-a --args]=ARGS [-h --help] [--dryrun]`
 
 ### Commands
+The following is a complete list of all available development commands:
 
-| Command              | Description                                                         |
-| -------------------- | ------------------------------------------------------------------- |
-| build-package        | Build production version of repo for publishing                     |
-| build-prod           | Publish pip package of repo to PyPi                                 |
-| build-publish        | Run production tests first then publish pip package of repo to PyPi |
-| build-test           | Build test version of repo for prod testing                         |
-| docker-build         | Build image of openexr-tools                                              |
-| docker-build-prod    | Build production image of openexr-tools                                   |
-| docker-container     | Display the Docker container id of openexr-tools                          |
-| docker-destroy       | Shutdown openexr-tools container and destroy its image                    |
-| docker-destroy-prod  | Shutdown openexr-tools production container and destroy its image         |
-| docker-image         | Display the Docker image id of openexr-tools                              |
-| docker-prod          | Start openexr-tools production container                                  |
-| docker-push          | Push openexr-tools production image to Dockerhub                          |
-| docker-remove        | Remove openexr-tools Docker image                                         |
-| docker-restart       | Restart openexr-tools container                                           |
-| docker-start         | Start openexr-tools container                                             |
-| docker-stop          | Stop openexr-tools container                                              |
-| docs                 | Generate sphinx documentation                                       |
-| docs-architecture    | Generate architecture.svg diagram from all import statements        |
-| docs-full            | Generate documentation, coverage report, diagram and code           |
-| docs-metrics         | Generate code metrics report, plots and tables                      |
-| library-add          | Add a given package to a given dependency group                     |
-| library-graph-dev    | Graph dependencies in dev environment                               |
-| library-graph-prod   | Graph dependencies in prod environment                              |
-| library-install-dev  | Install all dependencies into dev environment                       |
-| library-install-prod | Install all dependencies into prod environment                      |
-| library-list-dev     | List packages in dev environment                                    |
-| library-list-prod    | List packages in prod environment                                   |
-| library-lock-dev     | Resolve dev.lock file                                               |
-| library-lock-prod    | Resolve prod.lock file                                              |
-| library-remove       | Remove a given package from a given dependency group                |
-| library-search       | Search for pip packages                                             |
-| library-sync-dev     | Sync dev environment with packages listed in dev.lock               |
-| library-sync-prod    | Sync prod environment with packages listed in prod.lock             |
-| library-update       | Update dev dependencies                                             |
-| library-update-pdm   | Update PDM                                                          |
-| session-app          | Run app                                                             |
-| session-lab          | Run jupyter lab server                                              |
-| session-python       | Run python session with dev dependencies                            |
-| state                | State of openexr-tools                                                    |
-| test-coverage        | Generate test coverage report                                       |
-| test-dev             | Run all tests                                                       |
-| test-fast            | Test all code excepts tests marked with SKIP_SLOWS_TESTS decorator  |
-| test-lint            | Run linting and type checking                                       |
-| test-prod            | Run tests across all support python versions                        |
-| version              | Full resolution of repo: dependencies, linting, tests, docs, etc    |
-| version-bump-major   | Bump pyproject major version                                        |
-| version-bump-minor   | Bump pyproject minor version                                        |
-| version-bump-patch   | Bump pyproject patch version                                        |
-| zsh                  | Run ZSH session inside openexr-tools container                            |
-| zsh-complete         | Generate oh-my-zsh completions                                      |
-| zsh-root             | Run ZSH session as root inside openexr-tools container                    |
+| Command                 | Description                                                         |
+| ----------------------- | ------------------------------------------------------------------- |
+| build-package           | Build production version of repo for publishing                     |
+| build-prod              | Publish pip package of repo to PyPi                                 |
+| build-publish           | Run production tests first then publish pip package of repo to PyPi |
+| build-test              | Build test version of repo for prod testing                         |
+| docker-build            | Build Docker image                                                  |
+| docker-build-from-cache | Build Docker image from cached image                                |
+| docker-build-prod       | Build production image                                              |
+| docker-container        | Display the Docker container id                                     |
+| docker-destroy          | Shutdown container and destroy its image                            |
+| docker-destroy-prod     | Shutdown production container and destroy its image                 |
+| docker-image            | Display the Docker image id                                         |
+| docker-prod             | Start production container                                          |
+| docker-pull-dev         | Pull development image from Docker registry                         |
+| docker-pull-prod        | Pull production image from Docker registry                          |
+| docker-push-dev         | Push development image to Docker registry                           |
+| docker-push-dev-latest  | Push development image to Docker registry with dev-latest tag       |
+| docker-push-prod        | Push production image to Docker registry                            |
+| docker-push-prod-latest | Push production image to Docker registry with prod-latest tag       |
+| docker-remove           | Remove Docker image                                                 |
+| docker-restart          | Restart Docker container                                            |
+| docker-start            | Start Docker container                                              |
+| docker-stop             | Stop Docker container                                               |
+| docs                    | Generate sphinx documentation                                       |
+| docs-architecture       | Generate architecture.svg diagram from all import statements        |
+| docs-full               | Generate documentation, coverage report, diagram and code           |
+| docs-metrics            | Generate code metrics report, plots and tables                      |
+| library-add             | Add a given package to a given dependency group                     |
+| library-graph-dev       | Graph dependencies in dev environment                               |
+| library-graph-prod      | Graph dependencies in prod environment                              |
+| library-install-dev     | Install all dependencies into dev environment                       |
+| library-install-prod    | Install all dependencies into prod environment                      |
+| library-list-dev        | List packages in dev environment                                    |
+| library-list-prod       | List packages in prod environment                                   |
+| library-lock-dev        | Resolve dev.lock file                                               |
+| library-lock-prod       | Resolve prod.lock file                                              |
+| library-remove          | Remove a given package from a given dependency group                |
+| library-search          | Search for pip packages                                             |
+| library-sync-dev        | Sync dev environment with packages listed in dev.lock               |
+| library-sync-prod       | Sync prod environment with packages listed in prod.lock             |
+| library-update          | Update dev dependencies                                             |
+| library-update-pdm      | Update PDM                                                          |
+| quickstart              | Display quickstart guide                                            |
+| session-lab             | Run jupyter lab server                                              |
+| session-python          | Run python session with dev dependencies                            |
+| session-server          | Runn application server inside Docker container                     |
+| state                   | State of repository and Docker container                            |
+| test-coverage           | Generate test coverage report                                       |
+| test-dev                | Run all tests                                                       |
+| test-fast               | Test all code excepts tests marked with SKIP_SLOWS_TESTS decorator  |
+| test-lint               | Run linting and type checking                                       |
+| test-prod               | Run tests across all support python versions                        |
+| version                 | Full resolution of repo: dependencies, linting, tests, docs, etc    |
+| version-bump-major      | Bump pyproject major version                                        |
+| version-bump-minor      | Bump pyproject minor version                                        |
+| version-bump-patch      | Bump pyproject patch version                                        |
+| version-commit          | Tag with version and commit changes to master                       |
+| zsh                     | Run ZSH session inside Docker container                             |
+| zsh-complete            | Generate oh-my-zsh completions                                      |
+| zsh-root                | Run ZSH session as root inside Docker container                     |
 
 ### Flags
 
