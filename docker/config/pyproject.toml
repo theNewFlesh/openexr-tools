@@ -34,6 +34,7 @@ dependencies = [
     "click>=8.1.3",
     "lunchbox>=0.3.3",
     "numpy",
+    "openexr-python>=2024.1.5.11.15.26",
 ]
 
 [project.urls]
