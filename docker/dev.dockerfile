@@ -204,12 +204,12 @@ RUN echo "\n${CYAN}INSTALL DEV ENVIRONMENT${CLEAR}"; \
     ln -s `_x_env_get_path dev 3.10`/lib/python3.10/site-packages .dev-packages
 
 # create prod envs
-# RUN echo "\n${CYAN}INSTALL PROD ENVIRONMENTS${CLEAR}"; \
-#     . /home/ubuntu/scripts/x_tools.sh && \
-#     export CONFIG_DIR=/home/ubuntu/config && \
-#     export SCRIPT_DIR=/home/ubuntu/scripts && \
-#     x_env_init prod 3.10 && \
-#     x_env_init prod 3.9
+RUN echo "\n${CYAN}INSTALL PROD ENVIRONMENTS${CLEAR}"; \
+    . /home/ubuntu/scripts/x_tools.sh && \
+    export CONFIG_DIR=/home/ubuntu/config && \
+    export SCRIPT_DIR=/home/ubuntu/scripts && \
+    x_env_init prod 3.10 && \
+    x_env_init prod 3.9
 
 # build jupyter lab
 # RUN echo "\n${CYAN}BUILD JUPYTER LAB${CLEAR}"; \
