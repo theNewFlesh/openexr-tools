@@ -18,7 +18,4 @@ services:
       - ~/.ssh:/home/ubuntu/.ssh:ro
       - ./config/jupyter:/home/ubuntu/.jupyter
       - ./config/zshrc:/home/ubuntu/.zshrc
-      - ../artifacts:/tmp/dash_artifacts
-      # - /mnt/storage:/mnt/storage
     working_dir: "/home/ubuntu"
-    command: "tail -f /dev/null"
