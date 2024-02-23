@@ -1,6 +1,6 @@
 # VARIABLES---------------------------------------------------------------------
 export HOME="/home/ubuntu"
-export REPO="infrastructure"
+export REPO="openexr-tools"
 export REPO_DIR="$HOME/$REPO"
 export REPO_SNAKE_CASE=`echo $REPO | sed 's/-/_/g'`
 export REPO_SUBPACKAGE="$REPO_DIR/python/$REPO_SNAKE_CASE"
