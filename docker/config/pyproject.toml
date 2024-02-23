@@ -41,9 +41,6 @@ dependencies = [
 repository = "https://github.com/thenewflesh/openexr-tools"
 documentation = "https://thenewflesh.github.io/openexr-tools"
 
-[project.scripts]
-openexr-tools = "openexr_tools.command:main"
-
 [project.optional-dependencies]
 
 [tool.pdm.dev-dependencies]
