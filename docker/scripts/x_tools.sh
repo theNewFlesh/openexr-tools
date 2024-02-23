@@ -1,17 +1,19 @@
 # VARIABLES---------------------------------------------------------------------
 export HOME="/home/ubuntu"
-export REPO="openexr-tools"
+export REPO="infrastructure"
 export REPO_DIR="$HOME/$REPO"
 export REPO_SNAKE_CASE=`echo $REPO | sed 's/-/_/g'`
 export REPO_SUBPACKAGE="$REPO_DIR/python/$REPO_SNAKE_CASE"
-export PATH=":$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$HOME/.local/lib"
+export REPO_COMMAND_FILE="$REPO_SUBPACKAGE/command.py"
+export PATH="$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$HOME/.local/lib:$HOME/go/bin"
 export PYTHONPATH="$REPO_DIR/python:$HOME/.local/lib"
 export BUILD_DIR="$HOME/build"
 export CONFIG_DIR="$REPO_DIR/docker/config"
 export PDM_DIR="$HOME/pdm"
 export SCRIPT_DIR="$REPO_DIR/docker/scripts"
-export DOCS_DIR="$REPO_DIR/docs"
-export MIN_PYTHON_VERSION="3.9"
+export DOCS_DIR="$REPO_DIR/public"
+export MKDOCS_DIR="$REPO_DIR/mkdocs"
+export MIN_PYTHON_VERSION="3.10"
 export MAX_PYTHON_VERSION="3.10"
 export TEST_VERBOSITY=0
 export TEST_PROCS="auto"
@@ -640,6 +642,14 @@ x_test_prod () {
 }
 
 # VERSION-FUNCTIONS-------------------------------------------------------------
+_x_get_version () {
+    # get current pyproject version
+    cat $CONFIG_DIR/pyproject.toml \
+        | grep -E '^version *=' \
+        | awk '{print $3}' \
+        | sed 's/\"//g';
+}
+
 x_version () {
     # Full resolution of repo: dependencies, linting, tests, docs, etc
     x_library_install_dev;
