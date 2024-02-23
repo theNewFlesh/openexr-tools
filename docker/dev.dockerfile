@@ -70,9 +70,6 @@ RUN echo "\n${CYAN}INSTALL PYTHON${CLEAR}"; \
         python3.9-dev \
         python3.9-venv \
         python3.9-distutils \
-        python3.8-dev \
-        python3.8-venv \
-        python3.8-distutils \
     && rm -rf /var/lib/apt/lists/*
 
 # install pip
@@ -207,13 +204,12 @@ RUN echo "\n${CYAN}INSTALL DEV ENVIRONMENT${CLEAR}"; \
     ln -s `_x_env_get_path dev 3.10`/lib/python3.10/site-packages .dev-packages
 
 # create prod envs
-RUN echo "\n${CYAN}INSTALL PROD ENVIRONMENTS${CLEAR}"; \
-    . /home/ubuntu/scripts/x_tools.sh && \
-    export CONFIG_DIR=/home/ubuntu/config && \
-    export SCRIPT_DIR=/home/ubuntu/scripts && \
-    x_env_init prod 3.10 && \
-    x_env_init prod 3.9 && \
-    x_env_init prod 3.8
+# RUN echo "\n${CYAN}INSTALL PROD ENVIRONMENTS${CLEAR}"; \
+#     . /home/ubuntu/scripts/x_tools.sh && \
+#     export CONFIG_DIR=/home/ubuntu/config && \
+#     export SCRIPT_DIR=/home/ubuntu/scripts && \
+#     x_env_init prod 3.10 && \
+#     x_env_init prod 3.9
 
 # build jupyter lab
 # RUN echo "\n${CYAN}BUILD JUPYTER LAB${CLEAR}"; \

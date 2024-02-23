@@ -24,7 +24,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Typing :: Typed",
@@ -39,8 +38,6 @@ dependencies = [
 [project.urls]
 repository = "https://github.com/thenewflesh/openexr-tools"
 documentation = "https://thenewflesh.github.io/openexr-tools"
-
-[project.optional-dependencies]
 
 [tool.pdm.dev-dependencies]
 lab = [
