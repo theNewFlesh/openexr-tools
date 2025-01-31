@@ -33,6 +33,8 @@
 [![](https://img.shields.io/pypi/v/openexr-tools?style=for-the-badge&label=PyPI&color=5F95DE&logo=pypi&logoColor=5F95DE)](https://pypi.org/project/openexr-tools/)
 [![](https://img.shields.io/pypi/dm/openexr-tools?style=for-the-badge&label=Downloads&color=5F95DE)](https://pepy.tech/project/openexr-tools)
 
+<p><img src="resources/logo.png"width="666px" height="360px"></p>
+
 # Introduction
 Tools for working with OpenEXR image files.
 
