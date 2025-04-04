@@ -23,23 +23,45 @@ WORKDIR /home/ubuntu
 RUN echo "\n${CYAN}INSTALL GENERIC DEPENDENCIES${CLEAR}"; \
     apt update && \
     apt install -y \
-        software-properties-common \
-        wget && \
+        curl \
+        software-properties-common && \
+    rm -rf /var/lib/apt/lists/*
+
+# install gcc
+ENV CC=gcc
+ENV CXX=g++
+RUN echo "\n${CYAN}INSTALL GCC${CLEAR}"; \
+    apt update && \
+    apt install -y \
+        build-essential \
+        g++ \
+        gcc \
+        zlib1g-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# install OpenEXR
+ENV LD_LIBRARY_PATH='/usr/include/python3.10m/dist-packages'
+RUN echo "\n${CYAN}INSTALL OPENEXR${CLEAR}"; \
+    apt update && \
+    apt install -y \
+        libopenexr-dev \
+        openexr && \
     rm -rf /var/lib/apt/lists/*
 
 # install python3.10 and pip
 RUN echo "\n${CYAN}SETUP PYTHON3.10${CLEAR}"; \
     add-apt-repository -y ppa:deadsnakes/ppa && \
     apt update && \
-    apt install --fix-missing -y python3.10 && \
+    apt install --fix-missing -y python3.10-dev && \
     rm -rf /var/lib/apt/lists/* && \
-    wget https://bootstrap.pypa.io/get-pip.py && \
+    curl -fsSL https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
     python3.10 get-pip.py && \
     rm -rf /home/ubuntu/get-pip.py
 
 # install openexr-tools
 USER ubuntu
-ENV REPO='openexr-tools'
-ENV PYTHONPATH "${PYTHONPATH}:/home/ubuntu/$REPO/python"
-RUN echo "\n${CYAN}INSTALL OPENEXR-TOOLS{CLEAR}"; \
-    pip3.10 install --user --upgrade openexr-tools
+ARG VERSION
+RUN echo "\n${CYAN}INSTALL OPENEXR-TOOLS${CLEAR}"; \
+    pip3.10 install --user openexr-tools==$VERSION
+
+ENV PATH="$PATH:/home/ubuntu/.local/bin"

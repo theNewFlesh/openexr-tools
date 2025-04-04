@@ -1,8 +1,8 @@
-version: "3.8"
 services:
   openexr-tools:
     container_name: openexr-tools
     image: openexr-tools:dev
+    platform: linux/amd64
     build:
       context: .
       dockerfile: dev.dockerfile

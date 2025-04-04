@@ -26,48 +26,43 @@
     </a>
 </p>
 
-<!-- <img id="logo" src="resources/logo.png" style="max-width: 717px"> -->
-
 [![](https://img.shields.io/badge/License-MIT-F77E70?style=for-the-badge)](https://github.com/thenewflesh/openexr-tools/blob/master/LICENSE)
 [![](https://img.shields.io/pypi/pyversions/openexr-tools?style=for-the-badge&label=Python&color=A0D17B&logo=python&logoColor=A0D17B)](https://github.com/thenewflesh/openexr-tools/blob/master/docker/config/pyproject.toml)
 [![](https://img.shields.io/pypi/v/openexr-tools?style=for-the-badge&label=PyPI&color=5F95DE&logo=pypi&logoColor=5F95DE)](https://pypi.org/project/openexr-tools/)
 [![](https://img.shields.io/pypi/dm/openexr-tools?style=for-the-badge&label=Downloads&color=5F95DE)](https://pepy.tech/project/openexr-tools)
 
-<p><img src="resources/logo.png"width="666px" height="360px"></p>
+<!-- <img id="logo" src="sphinx/images/logo.png" style="max-width: 717px"> -->
 
 # Introduction
+
 Tools for working with OpenEXR image files.
 
 See [documentation](https://thenewflesh.github.io/openexr-tools/) for details.
 
-# Installation
-### Python
-`pip install openexr-tools`
+# Installation for Developers
 
 ### Docker
 1. Install [docker-desktop](https://docs.docker.com/desktop/)
-2. `docker pull thenewflesh/openexr-tools:[version]`
-
-### Docker For Developers
-1. Install [docker-desktop](https://docs.docker.com/desktop/)
 2. Ensure docker-desktop has at least 4 GB of memory allocated to it.
-3. `git clone git@github.com:thenewflesh/openexr-tools.git`
+3. `git clone git@github.com:theNewFlesh/openexr-tools.git`
 4. `cd openexr-tools`
-6. `chmod +x bin/openexr-tools`
-7. `bin/openexr-tools docker-start`
+5. `chmod +x bin/openexr-tools`
+6. `bin/openexr-tools docker-start`
+   - If building on a M1 Mac run `export DOCKER_DEFAULT_PLATFORM=linux/amd64` first.
 
 The service should take a few minutes to start up.
 
 Run `bin/openexr-tools --help` for more help on the command line tool.
 
 ### ZSH Setup
-
 1. `bin/openexr-tools` must be run from this repository's top level directory.
 2. Therefore, if using zsh, it is recommended that you paste the following line
     in your ~/.zshrc file:
-    - ```alias openexr-tools=`cd [parent dir]/openexr-tools; bin/openexr-tools` ```
+    - `alias openexr-tools="cd [parent dir]/openexr-tools; bin/openexr-tools"`
     - Replace `[parent dir]` with the parent directory of this repository
-3. Running the `zsh-complete` command will enable tab completions of the cli
+3. Consider adding the following line to your ~/.zshrc if you are using a M1 Mac:
+    - `export DOCKER_DEFAULT_PLATFORM=linux/amd64`
+4. Running the `zsh-complete` command will enable tab completions of the cli
    commands, in the next shell session.
 
    For example:
@@ -75,6 +70,38 @@ Run `bin/openexr-tools --help` for more help on the command line tool.
      tab to cycle through
    - `openexr-tools docker-[tab]` will show you only the cli options that begin with
      "docker-"
+
+# Installation for Production
+
+### Python
+`pip install openexr-tools`
+
+If you are on Debian-based Linux and you run into C library issues such as with
+OpenEXR, the following may help:
+```
+apt update && \
+apt install --fix-missing -y python3.10-dev && \
+apt install -y \
+    build-essential \
+    g++ \
+    gcc \
+    zlib1g-dev
+```
+
+For OpenEXR you will also need this:
+```
+apt install -y \
+    libopenexr-dev \
+    openexr
+```
+
+Please see the prod.dockerfile for an official example of how to build a docker
+image with openexr-tools.
+
+### Docker
+1. Install [docker-desktop](https://docs.docker.com/desktop/)
+2. `docker pull theNewFlesh/openexr-tools:[mode]-[version]`
+
 
 ---
 
@@ -144,67 +171,71 @@ Its usage pattern is: `bin/openexr-tools COMMAND [-a --args]=ARGS [-h --help] [-
 ### Commands
 The following is a complete list of all available development commands:
 
-| Command                 | Description                                                         |
-| ----------------------- | ------------------------------------------------------------------- |
-| build-package           | Build production version of repo for publishing                     |
-| build-prod              | Publish pip package of repo to PyPi                                 |
-| build-publish           | Run production tests first then publish pip package of repo to PyPi |
-| build-test              | Build test version of repo for prod testing                         |
-| docker-build            | Build Docker image                                                  |
-| docker-build-from-cache | Build Docker image from cached image                                |
-| docker-build-prod       | Build production image                                              |
-| docker-container        | Display the Docker container id                                     |
-| docker-destroy          | Shutdown container and destroy its image                            |
-| docker-destroy-prod     | Shutdown production container and destroy its image                 |
-| docker-image            | Display the Docker image id                                         |
-| docker-prod             | Start production container                                          |
-| docker-pull-dev         | Pull development image from Docker registry                         |
-| docker-pull-prod        | Pull production image from Docker registry                          |
-| docker-push-dev         | Push development image to Docker registry                           |
-| docker-push-dev-latest  | Push development image to Docker registry with dev-latest tag       |
-| docker-push-prod        | Push production image to Docker registry                            |
-| docker-push-prod-latest | Push production image to Docker registry with prod-latest tag       |
-| docker-remove           | Remove Docker image                                                 |
-| docker-restart          | Restart Docker container                                            |
-| docker-start            | Start Docker container                                              |
-| docker-stop             | Stop Docker container                                               |
-| docs                    | Generate sphinx documentation                                       |
-| docs-architecture       | Generate architecture.svg diagram from all import statements        |
-| docs-full               | Generate documentation, coverage report, diagram and code           |
-| docs-metrics            | Generate code metrics report, plots and tables                      |
-| library-add             | Add a given package to a given dependency group                     |
-| library-graph-dev       | Graph dependencies in dev environment                               |
-| library-graph-prod      | Graph dependencies in prod environment                              |
-| library-install-dev     | Install all dependencies into dev environment                       |
-| library-install-prod    | Install all dependencies into prod environment                      |
-| library-list-dev        | List packages in dev environment                                    |
-| library-list-prod       | List packages in prod environment                                   |
-| library-lock-dev        | Resolve dev.lock file                                               |
-| library-lock-prod       | Resolve prod.lock file                                              |
-| library-remove          | Remove a given package from a given dependency group                |
-| library-search          | Search for pip packages                                             |
-| library-sync-dev        | Sync dev environment with packages listed in dev.lock               |
-| library-sync-prod       | Sync prod environment with packages listed in prod.lock             |
-| library-update          | Update dev dependencies                                             |
-| library-update-pdm      | Update PDM                                                          |
-| quickstart              | Display quickstart guide                                            |
-| session-lab             | Run jupyter lab server                                              |
-| session-python          | Run python session with dev dependencies                            |
-| session-server          | Runn application server inside Docker container                     |
-| state                   | State of repository and Docker container                            |
-| test-coverage           | Generate test coverage report                                       |
-| test-dev                | Run all tests                                                       |
-| test-fast               | Test all code excepts tests marked with SKIP_SLOWS_TESTS decorator  |
-| test-lint               | Run linting and type checking                                       |
-| test-prod               | Run tests across all support python versions                        |
-| version                 | Full resolution of repo: dependencies, linting, tests, docs, etc    |
-| version-bump-major      | Bump pyproject major version                                        |
-| version-bump-minor      | Bump pyproject minor version                                        |
-| version-bump-patch      | Bump pyproject patch version                                        |
-| version-commit          | Tag with version and commit changes to master                       |
-| zsh                     | Run ZSH session inside Docker container                             |
-| zsh-complete            | Generate oh-my-zsh completions                                      |
-| zsh-root                | Run ZSH session as root inside Docker container                     |
+| Command                    | Description                                                         |
+| -------------------------- | ------------------------------------------------------------------- |
+| build-edit-prod-dockerfile | Edit prod.dockefile to use local package                            |
+| build-local-package        | Generate local pip package in docker/dist                           |
+| build-package              | Build production version of repo for publishing                     |
+| build-prod                 | Publish pip package of repo to PyPi                                 |
+| build-publish              | Run production tests first then publish pip package of repo to PyPi |
+| build-test                 | Build test version of repo for prod testing                         |
+| docker-build               | Build development image                                             |
+| docker-build-from-cache    | Build development image from registry cache                         |
+| docker-build-no-cache      | Build development image without cache                               |
+| docker-build-prod          | Build production image                                              |
+| docker-build-prod-no-cache | Build production image without cache                                |
+| docker-container           | Display the Docker container id                                     |
+| docker-destroy             | Shutdown container and destroy its image                            |
+| docker-destroy-prod        | Shutdown production container and destroy its image                 |
+| docker-image               | Display the Docker image id                                         |
+| docker-prod                | Start production container                                          |
+| docker-pull-dev            | Pull development image from Docker registry                         |
+| docker-pull-prod           | Pull production image from Docker registry                          |
+| docker-push-dev            | Push development image to Docker registry                           |
+| docker-push-dev-latest     | Push development image to Docker registry with dev-latest tag       |
+| docker-push-prod           | Push production image to Docker registry                            |
+| docker-push-prod-latest    | Push production image to Docker registry with prod-latest tag       |
+| docker-remove              | Remove Docker image                                                 |
+| docker-restart             | Restart container                                                   |
+| docker-start               | Start container                                                     |
+| docker-stop                | Stop container                                                      |
+| docs                       | Generate sphinx documentation                                       |
+| docs-architecture          | Generate architecture.svg diagram from all import statements        |
+| docs-full                  | Generate documentation, coverage report, diagram and code           |
+| docs-metrics               | Generate code metrics report, plots and tables                      |
+| library-add                | Add a given package to a given dependency group                     |
+| library-graph-dev          | Graph dependencies in dev environment                               |
+| library-graph-prod         | Graph dependencies in prod environment                              |
+| library-install-dev        | Install all dependencies into dev environment                       |
+| library-install-prod       | Install all dependencies into prod environment                      |
+| library-list-dev           | List packages in dev environment                                    |
+| library-list-prod          | List packages in prod environment                                   |
+| library-lock-dev           | Resolve dev.lock file                                               |
+| library-lock-prod          | Resolve prod.lock file                                              |
+| library-remove             | Remove a given package from a given dependency group                |
+| library-search             | Search for pip packages                                             |
+| library-sync-dev           | Sync dev environment with packages listed in dev.lock               |
+| library-sync-prod          | Sync prod environment with packages listed in prod.lock             |
+| library-update             | Update dev dependencies                                             |
+| library-update-pdm         | Update PDM                                                          |
+| quickstart                 | Display quickstart guide                                            |
+| session-lab                | Run jupyter lab server                                              |
+| session-python             | Run python session with dev dependencies                            |
+| state                      | State of repository and Docker container                            |
+| test-coverage              | Generate test coverage report                                       |
+| test-dev                   | Run all tests                                                       |
+| test-fast                  | Test all code excepts tests marked with SKIP_SLOWS_TESTS decorator  |
+| test-format                | Format all python files                                             |
+| test-lint                  | Run linting and type checking                                       |
+| test-prod                  | Run tests across all support python versions                        |
+| version                    | Full resolution of repo: dependencies, linting, tests, docs, etc    |
+| version-bump-major         | Bump pyproject major version                                        |
+| version-bump-minor         | Bump pyproject minor version                                        |
+| version-bump-patch         | Bump pyproject patch version                                        |
+| version-commit             | Tag with version and commit changes to master                       |
+| zsh                        | Run ZSH session inside Docker container                             |
+| zsh-complete               | Generate oh-my-zsh completions                                      |
+| zsh-root                   | Run ZSH session as root inside Docker container                     |
 
 ### Flags
 
