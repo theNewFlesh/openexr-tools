@@ -15,21 +15,21 @@
 <polygon fill="#343434" stroke="#343434" points="101.5,-190 47.5,-190 47.5,-154 101.5,-154 101.5,-190"/>
 <text text-anchor="middle" x="74.5" y="-168.3" font-family="Courier,monospace" font-size="14.00" fill="#b6ecf3">cli</text>
 </g>
-<!-- openexr_tools.enum -->
+<!-- openexr_tools\.enum -->
 <g id="node2" class="node">
-<title>openexr_tools.enum</title>
+<title>openexr_tools\.enum</title>
 <polygon fill="#343434" stroke="#343434" points="350,-290 185,-290 185,-254 350,-254 350,-290"/>
 <text text-anchor="middle" x="267.5" y="-268.3" font-family="Courier,monospace" font-size="14.00" fill="#b6ecf3">openexr_tools.enum</text>
 </g>
-<!-- openexr_tools.tools -->
+<!-- openexr_tools\.tools -->
 <g id="node3" class="node">
-<title>openexr_tools.tools</title>
+<title>openexr_tools\.tools</title>
 <polygon fill="#343434" stroke="#343434" points="559,-171 386,-171 386,-135 559,-135 559,-171"/>
 <text text-anchor="middle" x="472.5" y="-149.3" font-family="Courier,monospace" font-size="14.00" fill="#b6ecf3">openexr_tools.tools</text>
 </g>
-<!-- openexr_tools.enum&#45;&gt;openexr_tools.tools -->
+<!-- openexr_tools\.enum&#45;&gt;openexr_tools\.tools -->
 <g id="edge1" class="edge">
-<title>openexr_tools.enum&#45;&gt;openexr_tools.tools</title>
+<title>openexr_tools\.enum&#45;&gt;openexr_tools\.tools</title>
 <path fill="none" stroke="#b6ecf3" d="M320.25,-253.92C330.32,-249.78 340.65,-245.08 350,-240 383.24,-221.94 418.03,-196.23 441.82,-177.44"/>
 <polygon fill="#b6ecf3" stroke="#b6ecf3" points="444.12,-180.08 449.76,-171.11 439.76,-174.61 444.12,-180.08"/>
 </g>
@@ -39,15 +39,15 @@
 <polygon fill="#343434" stroke="#343434" points="136.5,-244 12.5,-244 12.5,-208 136.5,-208 136.5,-244"/>
 <text text-anchor="middle" x="74.5" y="-222.3" font-family="Courier,monospace" font-size="14.00" fill="#a0d17b">openexr_tools</text>
 </g>
-<!-- openexr_tools&#45;&gt;openexr_tools.enum -->
+<!-- openexr_tools&#45;&gt;openexr_tools\.enum -->
 <g id="edge2" class="edge">
-<title>openexr_tools&#45;&gt;openexr_tools.enum</title>
+<title>openexr_tools&#45;&gt;openexr_tools\.enum</title>
 <path fill="none" stroke="#a0d17b" d="M136.72,-240.74C151.04,-244.19 166.55,-247.93 181.69,-251.58"/>
 <polygon fill="#a0d17b" stroke="#a0d17b" points="181.04,-255.02 191.58,-253.96 182.67,-248.21 181.04,-255.02"/>
 </g>
-<!-- openexr_tools&#45;&gt;openexr_tools.tools -->
+<!-- openexr_tools&#45;&gt;openexr_tools\.tools -->
 <g id="edge3" class="edge">
-<title>openexr_tools&#45;&gt;openexr_tools.tools</title>
+<title>openexr_tools&#45;&gt;openexr_tools\.tools</title>
 <path fill="none" stroke="#a0d17b" d="M136.69,-227.8C192.95,-228.05 278.26,-224.84 350,-207 377.86,-200.07 407.33,-187.13 430.26,-175.66"/>
 <polygon fill="#a0d17b" stroke="#a0d17b" points="432.03,-178.68 439.35,-171.02 428.85,-172.45 432.03,-178.68"/>
 </g>
@@ -57,9 +57,9 @@
 <polygon fill="#343434" stroke="#343434" points="296.5,-198 238.5,-198 238.5,-162 296.5,-162 296.5,-198"/>
 <text text-anchor="middle" x="267.5" y="-176.3" font-family="Courier,monospace" font-size="14.00" fill="#de958e">Imath</text>
 </g>
-<!-- Imath&#45;&gt;openexr_tools.tools -->
+<!-- Imath&#45;&gt;openexr_tools\.tools -->
 <g id="edge4" class="edge">
-<title>Imath&#45;&gt;openexr_tools.tools</title>
+<title>Imath&#45;&gt;openexr_tools\.tools</title>
 <path fill="none" stroke="#de958e" d="M296.73,-176.25C317.39,-173.5 346.72,-169.6 375.47,-165.77"/>
 <polygon fill="#de958e" stroke="#de958e" points="376.14,-169.21 385.59,-164.43 375.22,-162.28 376.14,-169.21"/>
 </g>
@@ -69,21 +69,21 @@
 <polygon fill="#343434" stroke="#343434" points="304.5,-144 230.5,-144 230.5,-108 304.5,-108 304.5,-144"/>
 <text text-anchor="middle" x="267.5" y="-122.3" font-family="Courier,monospace" font-size="14.00" fill="#de958e">OpenEXR</text>
 </g>
-<!-- OpenEXR&#45;&gt;openexr_tools.tools -->
+<!-- OpenEXR&#45;&gt;openexr_tools\.tools -->
 <g id="edge5" class="edge">
-<title>OpenEXR&#45;&gt;openexr_tools.tools</title>
+<title>OpenEXR&#45;&gt;openexr_tools\.tools</title>
 <path fill="none" stroke="#de958e" d="M304.79,-130.83C324.73,-133.48 350.48,-136.9 375.76,-140.27"/>
 <polygon fill="#de958e" stroke="#de958e" points="375.41,-143.75 385.78,-141.6 376.33,-136.81 375.41,-143.75"/>
 </g>
-<!-- lunchbox.enforce -->
+<!-- lunchbox\.enforce -->
 <g id="node7" class="node">
-<title>lunchbox.enforce</title>
+<title>lunchbox\.enforce</title>
 <polygon fill="#343434" stroke="#343434" points="149,-298 0,-298 0,-262 149,-262 149,-298"/>
 <text text-anchor="middle" x="74.5" y="-276.3" font-family="Courier,monospace" font-size="14.00" fill="#de958e">lunchbox.enforce</text>
 </g>
-<!-- lunchbox.enforce&#45;&gt;openexr_tools.enum -->
+<!-- lunchbox\.enforce&#45;&gt;openexr_tools\.enum -->
 <g id="edge6" class="edge">
-<title>lunchbox.enforce&#45;&gt;openexr_tools.enum</title>
+<title>lunchbox\.enforce&#45;&gt;openexr_tools\.enum</title>
 <path fill="none" stroke="#de958e" d="M149.07,-276.92C157.46,-276.57 166.08,-276.21 174.66,-275.85"/>
 <polygon fill="#de958e" stroke="#de958e" points="174.86,-279.34 184.7,-275.43 174.57,-272.35 174.86,-279.34"/>
 </g>
@@ -93,21 +93,21 @@
 <polygon fill="#343434" stroke="#343434" points="296.5,-90 238.5,-90 238.5,-54 296.5,-54 296.5,-90"/>
 <text text-anchor="middle" x="267.5" y="-68.3" font-family="Courier,monospace" font-size="14.00" fill="#de958e">numpy</text>
 </g>
-<!-- numpy&#45;&gt;openexr_tools.tools -->
+<!-- numpy&#45;&gt;openexr_tools\.tools -->
 <g id="edge7" class="edge">
-<title>numpy&#45;&gt;openexr_tools.tools</title>
+<title>numpy&#45;&gt;openexr_tools\.tools</title>
 <path fill="none" stroke="#de958e" d="M296.65,-80.57C312.47,-85.58 332.48,-92.22 350,-99 374.77,-108.58 401.82,-120.46 424.1,-130.63"/>
 <polygon fill="#de958e" stroke="#de958e" points="422.78,-133.88 433.33,-134.88 425.7,-127.52 422.78,-133.88"/>
 </g>
-<!-- numpy.typing -->
+<!-- numpy\.typing -->
 <g id="node9" class="node">
-<title>numpy.typing</title>
+<title>numpy\.typing</title>
 <polygon fill="#343434" stroke="#343434" points="325.5,-36 209.5,-36 209.5,0 325.5,0 325.5,-36"/>
 <text text-anchor="middle" x="267.5" y="-14.3" font-family="Courier,monospace" font-size="14.00" fill="#de958e">numpy.typing</text>
 </g>
-<!-- numpy.typing&#45;&gt;openexr_tools.tools -->
+<!-- numpy\.typing&#45;&gt;openexr_tools\.tools -->
 <g id="edge8" class="edge">
-<title>numpy.typing&#45;&gt;openexr_tools.tools</title>
+<title>numpy\.typing&#45;&gt;openexr_tools\.tools</title>
 <path fill="none" stroke="#de958e" d="M325.91,-33.72C334.23,-36.93 342.51,-40.68 350,-45 388.6,-67.27 425.81,-103.16 448.66,-127.39"/>
 <polygon fill="#de958e" stroke="#de958e" points="446.19,-129.87 455.55,-134.82 451.31,-125.11 446.19,-129.87"/>
 </g>
