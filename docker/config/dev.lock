@@ -3,7 +3,7 @@
 
 [metadata]
 groups = ["default", "dev", "lab", "test"]
-strategy = ["cross_platform"]
+strategy = []
 lock_version = "4.5.0"
 content_hash = "sha256:e94feeca7c61c4b4c68fa34d310a43ee4d35af54d34a7bc3fc64c73823dea00f"
 
@@ -675,8 +675,8 @@ dependencies = [
     "appnope; sys_platform == \"darwin\"",
     "comm",
     "debugpy",
-    "ipython==8.34.0; python_full_version < \"3.11\"",
-    "ipython==9.0.2; python_full_version >= \"3.11\"",
+    "ipython==8.35.0; python_full_version < \"3.11\"",
+    "ipython==9.1.0; python_full_version >= \"3.11\"",
     "jupyter-client",
     "jupyter-core",
     "matplotlib-inline",
@@ -694,7 +694,7 @@ files = [
 
 [[package]]
 name = "ipython"
-version = "8.34.0"
+version = "8.35.0"
 summary = ""
 dependencies = [
     "colorama; python_full_version < \"3.11\" and sys_platform == \"win32\"",
@@ -710,13 +710,13 @@ dependencies = [
     "typing-extensions; python_full_version < \"3.11\"",
 ]
 files = [
-    {file = "ipython-8.34.0-py3-none-any.whl", hash = "sha256:0419883fa46e0baa182c5d50ebb8d6b49df1889fdb70750ad6d8cfe678eda6e3"},
-    {file = "ipython-8.34.0.tar.gz", hash = "sha256:c31d658e754673ecc6514583e7dda8069e47136eb62458816b7d1e6625948b5a"},
+    {file = "ipython-8.35.0-py3-none-any.whl", hash = "sha256:e6b7470468ba6f1f0a7b116bb688a3ece2f13e2f94138e508201fad677a788ba"},
+    {file = "ipython-8.35.0.tar.gz", hash = "sha256:d200b7d93c3f5883fc36ab9ce28a18249c7706e51347681f80a0aef9895f2520"},
 ]
 
 [[package]]
 name = "ipython"
-version = "9.0.2"
+version = "9.1.0"
 summary = ""
 dependencies = [
     "colorama; python_full_version >= \"3.11\" and sys_platform == \"win32\"",
@@ -732,8 +732,8 @@ dependencies = [
     "typing-extensions; python_full_version == \"3.11.*\"",
 ]
 files = [
-    {file = "ipython-9.0.2-py3-none-any.whl", hash = "sha256:143ef3ea6fb1e1bffb4c74b114051de653ffb7737a3f7ab1670e657ca6ae8c44"},
-    {file = "ipython-9.0.2.tar.gz", hash = "sha256:ec7b479e3e5656bf4f58c652c120494df1820f4f28f522fb7ca09e213c2aab52"},
+    {file = "ipython-9.1.0-py3-none-any.whl", hash = "sha256:2df07257ec2f84a6b346b8d83100bcf8fa501c6e01ab75cd3799b0bb253b3d2a"},
+    {file = "ipython-9.1.0.tar.gz", hash = "sha256:a47e13a5e05e02f3b8e1e7a0f9db372199fe8c3763532fe7a1e0379e4e135f16"},
 ]
 
 [[package]]
@@ -1251,11 +1251,11 @@ files = [
 
 [[package]]
 name = "narwhals"
-version = "1.33.0"
+version = "1.34.0"
 summary = ""
 files = [
-    {file = "narwhals-1.33.0-py3-none-any.whl", hash = "sha256:f653319112fd121a1f1c18a40cf70dada773cdacfd53e62c2aa0afae43c17129"},
-    {file = "narwhals-1.33.0.tar.gz", hash = "sha256:6233d2457debf4b5fe4a1da54530c6fe2d84326f4a8e3bca35bbbff580a347cb"},
+    {file = "narwhals-1.34.0-py3-none-any.whl", hash = "sha256:9502b9aa5dfe125c090a3a0bbca95becfa1fac2cd67f8b80d12b1dc2ed751865"},
+    {file = "narwhals-1.34.0.tar.gz", hash = "sha256:bdd3fa60bea1f1e8b698e483be18dd43af13290da12dba69ea16dc1f3edbb8f7"},
 ]
 
 [[package]]
@@ -1770,15 +1770,15 @@ files = [
 
 [[package]]
 name = "pytest-cov"
-version = "6.1.0"
+version = "6.1.1"
 summary = ""
 dependencies = [
     "coverage",
     "pytest",
 ]
 files = [
-    {file = "pytest_cov-6.1.0-py3-none-any.whl", hash = "sha256:cd7e1d54981d5185ef2b8d64b50172ce97e6f357e6df5cb103e828c7f993e201"},
-    {file = "pytest_cov-6.1.0.tar.gz", hash = "sha256:ec55e828c66755e5b74a21bd7cc03c303a9f928389c0563e50ba454a6dbe71db"},
+    {file = "pytest_cov-6.1.1-py3-none-any.whl", hash = "sha256:bddf29ed2d0ab6f4df17b4c55b0a657287db8684af9c42ea546b21b1041b3dde"},
+    {file = "pytest_cov-6.1.1.tar.gz", hash = "sha256:46935f7aaefba760e716c2ebfbe1c216240b9592966e7da99ea8292d4d3e2a0a"},
 ]
 
 [[package]]
@@ -2057,8 +2057,8 @@ summary = ""
 dependencies = [
     "click",
     "graphviz",
-    "ipython==8.34.0; python_full_version < \"3.11\"",
-    "ipython==9.0.2; python_full_version >= \"3.11\"",
+    "ipython==8.35.0; python_full_version < \"3.11\"",
+    "ipython==9.1.0; python_full_version >= \"3.11\"",
     "lunchbox",
     "networkx",
     "numpy",
