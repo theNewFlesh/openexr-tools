@@ -5,7 +5,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>enum &mdash; openexr-tools  documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/style.css" />
 
@@ -17,7 +17,7 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -38,7 +38,7 @@
             openexr-tools
           </a>
               <div class="version">
-                0.4.0
+                0.5.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -80,7 +80,6 @@
 <li class="toctree-l1"><a class="reference internal" href="#module-openexr_tools.tools">tools</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#openexr_tools.tools.clean_exr_metadadata"><code class="docutils literal notranslate"><span class="pre">clean_exr_metadadata()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#openexr_tools.tools.read_exr"><code class="docutils literal notranslate"><span class="pre">read_exr()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#openexr_tools.tools.write_exr"><code class="docutils literal notranslate"><span class="pre">write_exr()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -291,8 +290,12 @@ writing EXRs.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="openexr_tools.tools.write_exr">
-<span class="sig-prename descclassname"><span class="pre">openexr_tools.tools.</span></span><span class="sig-name descname"><span class="pre">write_exr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fullpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">codec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ImageCodec.PIZ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/openexr_tools/tools.html#write_exr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#openexr_tools.tools.write_exr" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">write_exr(fullpath,</span> <span class="pre">image,</span> <span class="pre">metadata,</span> <span class="pre">codec=&lt;ImageCodec.PIZ&gt;</span></span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">write_exr</span>&#160; <span class="pre">string:</span> <span class="pre">piz</span></span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">write_exrexr_code:</span> <span class="pre">4)</span></span></dt>
 <dd><p>Writes image data and metadata as EXR to given file path.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
