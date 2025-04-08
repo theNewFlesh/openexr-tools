@@ -41,8 +41,8 @@
       "volume": "",
       "keywords": "OpenEXR, EXR, VFX, openexr, exr, vfx, computer-vision, cv, image, compositing",
       "year": "2023",
-      "python_min_version": "9",
-      "python_max_version": "10",
+      "python_min_version": "10",
+      "python_max_version": "13",
       "initial_repo_version": "0.4.0",
       "_template": "https://github.com/thenewflesh/cookiecutter-datalus"
     }
