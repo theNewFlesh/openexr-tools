@@ -47,7 +47,7 @@
       "python_max_version": "13",
       "architecture": "arm64",
       "initial_repo_version": "0.4.0",
-      "status_bar_color": "#9FD07A",
+      "status_bar_color": "#AC92DE",
       "_template": "https://github.com/thenewflesh/cookiecutter-datalus"
     }
   },

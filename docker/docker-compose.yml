@@ -2,7 +2,7 @@ services:
   openexr-tools:
     container_name: openexr-tools
     image: openexr-tools:dev
-    platform: linux/amd64
+    platform: linux/arm64
     build:
       context: .
       dockerfile: dev.dockerfile
